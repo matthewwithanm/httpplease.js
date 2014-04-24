@@ -40,11 +40,11 @@ module.exports = (grunt) ->
           base: '.'
           keepalive: grunt.option('keepalive')?
     express:
-      testapp:
+      testserver:
         options:
           hostname: 'localhost'
           port: 4001
-          server: './test/app'
+          server: './test/server'
     mocha:
       all:
         options:
@@ -55,6 +55,13 @@ module.exports = (grunt) ->
           urls: ["http://localhost:#{ TEST_SERVER_PORT }/test/index.html"]
           mocha:
             grep: grunt.option 'grep'  # Forward the grep option to mocha
+    mochaTest:
+      test:
+        options:
+          reporter: 'Spec'
+          clearRequireCache: true
+          grep: grunt.option 'grep'
+        src: ['test/**/*.js']
     watch:
       options:
         atBegin: true
@@ -75,6 +82,7 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-contrib-connect'
   grunt.loadNpmTasks 'grunt-express'
   grunt.loadNpmTasks 'grunt-mocha'
+  grunt.loadNpmTasks 'grunt-mocha-test'
   grunt.loadNpmTasks 'grunt-bump'
   grunt.loadNpmTasks 'grunt-browserify'
 
@@ -84,5 +92,12 @@ module.exports = (grunt) ->
   grunt.registerTask 'build:browsertests', ['coffee:browsertests']
   grunt.registerTask 'build:standalone', ['build:node', 'browserify:standalone']
   grunt.registerTask 'default', ['build']
-  grunt.registerTask 'test', ['build:browsertests', 'build:standalone', 'testapp', 'connect:tests', 'mocha']
-  grunt.registerTask 'testapp', ['express']
+  grunt.registerTask 'test:browser', ['build:browsertests', 'build:standalone', 'runtestserver', 'connect:tests', 'mocha']
+  grunt.registerTask 'test:server', ['runtestserver', 'settestglobals', 'mochaTest']
+  grunt.registerTask 'test', ['test:browser', 'settestglobals', 'mochaTest']
+  grunt.registerTask 'runtestserver', ['express:testserver']
+  grunt.registerTask 'settestglobals', ->
+    # Sets globals for the server tests so we can use the same module for
+    # browser tests.
+    GLOBAL.chai = require 'chai'
+    GLOBAL.httprequest = require './src/index'
