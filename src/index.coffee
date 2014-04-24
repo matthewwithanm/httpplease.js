@@ -23,7 +23,7 @@ class HttpError extends Error
 
 httpError = (message, xhr) ->
   err = new HttpError message
-  err.statusCode = xhr.statusCode or 0
+  err.status = xhr.status or 0
   err.request = xhr
   err
 
