@@ -11,8 +11,9 @@ parseOpts = (optsOrUrl) ->
   defaults =
     method: 'GET'
   opts = extend defaults, opts
-  @method = opts.method.toUpperCase()
-  @url = opts.url
+  opts.method = opts.method.toUpperCase()
+  opts.url = opts.url
+  opts
 
 
 class HttpError extends Error
