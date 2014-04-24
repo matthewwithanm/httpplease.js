@@ -9,6 +9,8 @@ features:
 
 [browserify] users can simply `npm install httprequest`.
 
+Minified and gzipped, the standalone browser build is ~2K.
+
 
 ## API
 
