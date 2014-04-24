@@ -29,7 +29,10 @@ httpError = (message, xhr) ->
 
 
 class Response
-  constructor: (@request) ->
+  constructor: (xhr) ->
+    @request = xhr
+    @status = xhr.status or 0
+    @text = xhr.responseText
 
 request = (optsOrUrl, cb) ->
   opts = parseOpts optsOrUrl
