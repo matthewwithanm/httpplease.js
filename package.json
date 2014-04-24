@@ -3,11 +3,17 @@
   "version": "0.0.1",
   "description": "Make HTTP requests in node or the browser",
   "main": "./lib/index.js",
-  "browser": {},
+  "browser": {
+    "./lib/createXHR.js": "./lib/createXHR-browser.js"
+  },
   "directories": {
     "test": "test"
   },
   "dependencies": {
+    "xmlhttprequest": "~1.6.0",
+    "urllite": "~0.4.2",
+    "once": "~1.3.0",
+    "xtend": "~3.0.0"
   },
   "devDependencies": {
     "coffee-script": "~1.7.1",
