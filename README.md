@@ -104,8 +104,8 @@ to your callback. It has the following properties:
 
 ## Similar Projects
 
-* [xhr] (browser only)
-* [httpify] (wraps xhr and [request])
+* [xhr] \(browser only\)
+* [httpify] \(wraps xhr and [request]\)
 
 
 [browserify]: http://browserify.org
