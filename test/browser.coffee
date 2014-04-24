@@ -1,6 +1,5 @@
-{assert} = require 'chai'
-httprequest = require '../src/index'
-
+assert = chai.assert
+request = httprequest
 
 describe 'httprequest', ->
   it 'passes a test', ->

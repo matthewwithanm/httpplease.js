@@ -20,7 +20,8 @@
     "grunt-mocha-test": "~0.10.2",
     "grunt-bump": "0.0.13",
     "browserify": "~3.44.2",
-    "coffeeify": "~0.6.0"
+    "grunt-contrib-connect": "~0.7.1",
+    "grunt-mocha": "~0.4.10"
   },
   "scripts": {
     "prepublish": "grunt build",
