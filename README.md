@@ -100,5 +100,14 @@ to your callback. It has the following properties:
 </table>
 
 
+## Similar Projects
+
+* [xhr] (browser only)
+* [httpify] (wraps xhr and [request])
+
+
 [browserify]: http://browserify.org
 [node-XMLHttpRequest]: https://github.com/driverdan/node-XMLHttpRequest
+[xhr]: https://github.com/Raynos/xhr
+[httpify]: https://github.com/scottcorgan/httpify
+[request]: https://github.com/mikeal/request
