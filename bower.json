@@ -1,0 +1,24 @@
+{
+  "name": "httprequest",
+  "version": "0.0.1",
+  "authors": [
+    "Matthew Dapena-Tretter <m@tthewwithanm.com>"
+  ],
+  "description": "Make HTTP requests in node or the browser",
+  "main": "browser-builds/standalone/httprequest.js",
+  "keywords": [
+    "xhr",
+    "request",
+    "http",
+    "XMLHttpRequest"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/matthewwithanm/httprequest.js",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
