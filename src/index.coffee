@@ -68,7 +68,7 @@ request = (optsOrUrl, cb) ->
   # Send the request. Since old versions of IE will fail on UTF8 paths, we
   # try to intelligently escape the URL (being careful not to double escape
   # anything).
-  xhr.open method, url.replace /[^%]+/g, (s) -> encodeURI s
+  xhr.open opts.method, opts.url.replace /[^%]+/g, (s) -> encodeURI s
   xhr.send()
 
 
