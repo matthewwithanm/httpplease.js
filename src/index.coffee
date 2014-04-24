@@ -24,13 +24,13 @@ class HttpError extends Error
 httpError = (message, xhr) ->
   err = new HttpError message
   err.status = xhr.status or 0
-  err.request = xhr
+  err.xhr = xhr
   err
 
 
 class Response
   constructor: (xhr) ->
-    @request = xhr
+    @xhr = xhr
     @status = xhr.status or 0
     @text = xhr.responseText
 

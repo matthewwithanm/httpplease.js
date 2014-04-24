@@ -75,7 +75,7 @@ has the following properties:
         <td>The response text.</td>
     </tr>
     <tr>
-        <td><code>request</code></td>
+        <td><code>xhr</code></td>
         <td>The XHR or XDomain object used to make the request.</td>
     </tr>
 </table>
@@ -96,7 +96,7 @@ to your callback. It has the following properties:
         <td>A description of the error.</td>
     </tr>
     <tr>
-        <td><code>request</code></td>
+        <td><code>xhr</code></td>
         <td>The XHR or XDomain object used to make the request.</td>
     </tr>
 </table>
