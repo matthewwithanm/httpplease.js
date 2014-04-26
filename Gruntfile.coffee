@@ -121,3 +121,4 @@ module.exports = (grunt) ->
     # browser tests.
     GLOBAL.chai = require 'chai'
     GLOBAL.httprequest = require './src/index'
+    GLOBAL.httprequestplugins = require './src/plugins'
