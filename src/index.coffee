@@ -1,9 +1,9 @@
 createXHR = require './createXHR'
-{createError} = require './errors'
-Request = require './Request'
-Response = require './Response'
-once = require 'once'
 delay = require './delay'
+{createError} = require './errors'
+Response = require './Response'
+Request = require './Request'
+once = require 'once'
 
 
 request = (req, cb) ->
