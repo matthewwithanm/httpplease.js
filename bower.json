@@ -4,7 +4,7 @@
   "authors": [
     "Matthew Dapena-Tretter <m@tthewwithanm.com>"
   ],
-  "description": "Make HTTP requests in node or the browser",
+  "description": "The polite HTTP request library for node and the browser",
   "main": "browser-builds/standalone/httpplease.js",
   "keywords": [
     "xhr",

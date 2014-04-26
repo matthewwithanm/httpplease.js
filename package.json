@@ -1,7 +1,7 @@
 {
   "name": "httpplease",
   "version": "0.4.0",
-  "description": "Make HTTP requests in node or the browser",
+  "description": "The polite HTTP request library for node and the browser",
   "main": "./lib/index.js",
   "browser": {
     "./lib/createxhr.js": "./lib/createxhr-browser.js"
