@@ -11,6 +11,9 @@ features:
 
 [browserify] and [webpack] users can simply `npm install httprequest`.
 
+`<script>` tag fans can grab the standalone build from the "browser-builds"
+directory.
+
 Minified and gzipped, the standalone browser build is ~2K.
 
 
