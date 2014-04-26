@@ -35,6 +35,14 @@ describe 'httpplease', ->
       assert.equal json.hello, 'world'
       done()
 
+  describe 'defaults', ->
+    it 'adds defaults', ->
+      assert.equal request.defaults(dummy: 5).defaults().dummy, 5
+
+    it "doesn't mutate the request function", ->
+      request.defaults dummy: 5
+      assert.isUndefined request.defaults().dummy
+
   describe 'use', ->
     it 'adds a plugin', ->
       startCount = request.plugins.length

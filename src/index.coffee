@@ -10,7 +10,7 @@ once = require 'once'
 
 factory = (defaults, plugins) ->
   request = (req, cb) ->
-    req = new Request extend request.defaults, req
+    req = new Request extend request.defaults(), req
 
     # Give the plugins a chance to create the XHR object
     for plugin in request.plugins
@@ -69,9 +69,12 @@ factory = (defaults, plugins) ->
         request req, cb
 
   request.plugins = plugins or []
-  request.defaults = defaults
 
-  request.use = (plugins...) -> factory @defaults, @plugins.concat plugins
+  request.defaults = (newValues) ->
+    if newValues then factory extend(@defaults(), newValues), @plugins
+    else defaults
+
+  request.use = (plugins...) -> factory @defaults(), @plugins.concat plugins
 
   request.bare = -> factory()
 

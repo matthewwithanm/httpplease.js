@@ -49,6 +49,15 @@ httpplease({method: 'GET', url: 'http://example.com'}, function(err, res) {
 });
 ```
 
+You can create a new request function with default request object values:
+
+```javascript
+var request = httpplease.defaults({method: 'GET', errorOn404: false});
+request('http://example.com', function(err, res) {
+    // This request was made using the defaults specified above.
+});
+```
+
 
 ### The request object
 
