@@ -20,7 +20,7 @@ factory = ->
       unless err
         res = new Response req
         for plugin in request.plugins
-          plugin?.processResponse res
+          plugin.processResponse? res
       cb err, res
 
     # When the request completes, continue.
@@ -45,7 +45,7 @@ factory = ->
     req.xhr = xhr
 
     for plugin in request.plugins
-      plugin?.processRequest req
+      plugin.processRequest? req
 
     # Send the request. Since old versions of IE will fail on UTF8 paths, we
     # try to intelligently escape the URL (being careful not to double escape
