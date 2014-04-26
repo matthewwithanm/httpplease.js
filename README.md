@@ -5,8 +5,9 @@ httprequest is a wrapper around XMLHttpRequest with the following awesome
 features:
 
 * Works in the browser and nodejs (thanks to [node-XMLHttpRequest])
-* Supports cross-domain requests in older versions of IE9 transparently
 * Extensible via a simple but powerful plugin system
+* Supports cross-domain requests in older versions of IE9 transparently with the
+  [oldiexdomain plugin](#plugins)
 
 [browserify] users can simply `npm install httprequest`.
 
@@ -114,6 +115,103 @@ to your callback. It has the following properties:
     <tr>
         <td><code>xhr</code></td>
         <td>The XHR or XDomain object used to make the request.</td>
+    </tr>
+</table>
+
+
+### Plugins
+
+httprequest supports plugins for changing how requests are made. Some plugins
+are built in:
+
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Description</th>
+    </tr>
+    <tr>
+        <td>oldiexdomain</td>
+        <td>
+            Enables cross domain requests in IE9 by (transparently) using the
+            <code>XDomainRequest</code> object when necessary.
+        </td>
+    </tr>
+</table>
+
+Plugins are enabled with the `use` method:
+
+```javascript
+var oldiexdomain = require('httprequest/lib/plugins/oldiexdomain');
+httprequest = httprequest.use(oldiexdomain);
+```
+
+Or, if you're using the standalone build:
+
+```html
+<script src="httprequest.js" type="text/javascript"></script>
+<script src="httprequestplugins.js" type="text/javascript"></script>
+```
+
+``javascript
+var oldiexdomain = httprequestplugins.oldiexdomain;
+httprequest = httprequest.use(oldiexdomain);
+```
+
+Notice that `use` returns a new httprequest instance. This is so that you can
+create multiple instances, each with their own plugins:
+
+```javascript
+var request = httprequest.use(oldiexdomain);
+var request2 = httprequest;
+
+request.get('http://example.com', function(err, res) { ... }); // "oldiexdomain" plugin is used.
+request2.get('http://example.com', function(err, res) { ... }); // No plugins are used.
+```
+
+You can use as many plugins as you want—either by passing multiple plugins to
+`use` or chaining calls:
+
+```javascript
+var request = httprequest
+  .use(oldiexdomain, myPlugin, myOtherPlugin)
+  .use(anotherPlugin);
+```
+
+In order to keep your builds as small as possible, no plugins are enabled by
+default.
+
+
+#### Custom Plugins
+
+In addition to the bundled plugins, you can create your own. Plugins are simply
+objects that implement one or more of the following methods:
+
+<table>
+    <tr>
+        <th>Method</th>
+        <th>Description</th>
+    </tr>
+    <tr>
+        <td><code>createXHR(req)</code></td>
+        <td>
+            Creates an XHR object. The first plugin that return a non-null value
+            from this method will be used.
+        </td>
+    </tr>
+    <tr>
+        <td><code>processRequest(req)</code></td>
+        <td>
+            This method gives the plugin a chance to manipulate the request
+            object before the request is made. For example, it can change the
+            body or add headers.
+        </td>
+    </tr>
+    <tr>
+        <td><code>processResponse(res)</code></td>
+        <td>
+            This method gives the plugin a chance to manipulate the response
+            object before the callback is invoked.
+        </td>
     </tr>
 </table>
 

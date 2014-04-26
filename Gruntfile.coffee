@@ -16,6 +16,12 @@ module.exports = (grunt) ->
             standalone: 'httprequest'
         files:
           './browser-builds/standalone/httprequest.js': './lib/index.js'
+      plugins:
+        options:
+          bundleOptions:
+            standalone: 'httprequestplugins'
+        files:
+          './browser-builds/standalone/httprequestplugins.js': './lib/plugins/index.js'
     uglify:
       browserbuilds:
         files: [
@@ -103,7 +109,7 @@ module.exports = (grunt) ->
   grunt.registerTask 'build', ['build:node', 'build:standalone']
   grunt.registerTask 'build:node', ['coffee']
   grunt.registerTask 'build:browsertests', ['coffee:browsertests']
-  grunt.registerTask 'build:standalone', ['build:node', 'browserify:standalone', 'uglify:browserbuilds']
+  grunt.registerTask 'build:standalone', ['build:node', 'browserify', 'uglify:browserbuilds']
   grunt.registerTask 'default', ['build']
   grunt.registerTask 'test:phantom', ['build:browsertests', 'build:standalone', 'runtestserver', 'connect:tests', 'mocha']
   grunt.registerTask 'test:browser', ['build:browsertests', 'build:standalone', 'runtestserver', 'connect:testskeepalive', 'express-keepalive']

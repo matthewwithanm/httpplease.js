@@ -9,7 +9,11 @@ once = require 'once'
 factory = ->
   request = (req, cb) ->
     req = new Request req
-    xhr = createXHR req.url
+
+    # Give the plugins a chance to create the XHR object
+    for plugin in request.plugins
+      if xhr = plugin?.createXHR? req then break # First come, first serve
+    xhr ?= createXHR()
 
     # Because XHR can be an XMLHttpRequest or an XDomainRequest, we add
     # `onreadystatechange`, `onload`, and `onerror` callbacks. We use the
