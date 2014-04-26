@@ -1,5 +1,5 @@
-httprequest.js
-==============
+HTTP, Please
+============
 
 There are a lot of JS libraries for making HTTP requests in JavaScript. Why use
 this one? Because it's awesome, that's why. And this is why it's awesome:
@@ -12,7 +12,7 @@ this one? Because it's awesome, that's why. And this is why it's awesome:
 * Supports **cross-domain requests in IE9** transparently with the
   [oldiexdomain plugin](#plugins)
 
-[browserify] and [webpack] users can simply `npm install httprequest`.
+[browserify] and [webpack] users can simply `npm install httpplease`.
 
 `<script>` tag fans can grab the standalone build from the "browser-builds"
 directory.
@@ -26,7 +26,7 @@ Minified and gzipped, the standalone browser build is <2K.
 ### Making a request
 
 ```javascript
-httprequest.get('http://example.com', function(err, res) {
+httpplease.get('http://example.com', function(err, res) {
     // Do something with the result.
 });
 ```
@@ -34,7 +34,7 @@ httprequest.get('http://example.com', function(err, res) {
 Alternatively, you can pass a request object as the first parameter:
 
 ```javascript
-httprequest.get({url: 'http://example.com'}, function(err, res) {
+httpplease.get({url: 'http://example.com'}, function(err, res) {
     // Do something with the result.
 });
 ```
@@ -42,7 +42,7 @@ httprequest.get({url: 'http://example.com'}, function(err, res) {
 If you'd rather include the method in the object, that's okay too:
 
 ```javascript
-httprequest({method: 'GET', url: 'http://example.com'}, function(err, res) {
+httpplease({method: 'GET', url: 'http://example.com'}, function(err, res) {
     // Do something with the result.
 });
 ```
@@ -148,7 +148,7 @@ to your callback. It has the following properties:
 
 ### Plugins
 
-httprequest supports plugins for changing how requests are made. Some plugins
+httpplease supports plugins for changing how requests are made. Some plugins
 are built in:
 
 <table>
@@ -195,40 +195,40 @@ are built in:
 Plugins are enabled with the `use` method:
 
 ```javascript
-var jsonparser = require('httprequest/lib/plugins/jsonparser');
-httprequest = httprequest.use(jsonparser);
+var jsonparser = require('httpplease/lib/plugins/jsonparser');
+httpplease = httpplease.use(jsonparser);
 ```
 
 Or, if you're using the standalone build:
 
 ```html
-<script src="httprequest.js" type="text/javascript"></script>
-<script src="httprequestplugins.js" type="text/javascript"></script>
+<script src="httpplease.js" type="text/javascript"></script>
+<script src="httppleaseplugins.js" type="text/javascript"></script>
 ```
 
 ```javascript
-var jsonparser = httprequestplugins.jsonparser;
-httprequest = httprequest.use(jsonparser);
+var jsonparser = httppleaseplugins.jsonparser;
+httpplease = httpplease.use(jsonparser);
 ```
 
-Notice that `use` returns a new httprequest instance. This is so that you can
+Notice that `use` returns a new httpplease instance. This is so that you can
 create multiple instances, each with their own plugins:
 
 ```javascript
-var request = httprequest.use(jsonparser);
+var request = httpplease.use(jsonparser);
 
 request
   .use(oldiexdomain)
   .get('http://example.com', function(err, res) { ... }); // Uses "jsonparser" plugin and "oldiexdomain".
 request.get('http://example.com', function(err, res) { ... }); // Only uses "jsonparser" plugin.
-httprequest.get('http://example.com', function(err, res) { ... }); // No extra plugins are used.
+httpplease.get('http://example.com', function(err, res) { ... }); // No extra plugins are used.
 ```
 
 You can use as many plugins as you want—either by passing multiple plugins to
 `use` or chaining calls:
 
 ```javascript
-var request = httprequest
+var request = httpplease
   .use(jsonparser, oldiexdomain, myPlugin)
   .use(anotherPlugin);
 ```
@@ -238,10 +238,10 @@ by default**. (See the table above.) However, some small plugins are. If you
 want to disable all plugins, use the `bare()` method:
 
 ```javascript
-var request = httprequest.bare();
+var request = httpplease.bare();
 ```
 
-Like `use()`, this method also returns a new httprequest instance so you can
+Like `use()`, this method also returns a new httpplease instance so you can
 continue to use the old object with the original plugins intact.
 
 

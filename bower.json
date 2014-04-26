@@ -1,11 +1,11 @@
 {
-  "name": "httprequest",
+  "name": "httpplease",
   "version": "0.1.0",
   "authors": [
     "Matthew Dapena-Tretter <m@tthewwithanm.com>"
   ],
   "description": "Make HTTP requests in node or the browser",
-  "main": "browser-builds/standalone/httprequest.js",
+  "main": "browser-builds/standalone/httpplease.js",
   "keywords": [
     "xhr",
     "request",
@@ -13,7 +13,7 @@
     "XMLHttpRequest"
   ],
   "license": "MIT",
-  "homepage": "https://github.com/matthewwithanm/httprequest.js",
+  "homepage": "https://github.com/matthewwithanm/httpplease.js",
   "ignore": [
     "**/.*",
     "node_modules",

@@ -13,15 +13,15 @@ module.exports = (grunt) ->
       standalone:
         options:
           bundleOptions:
-            standalone: 'httprequest'
+            standalone: 'httpplease'
         files:
-          './browser-builds/standalone/httprequest.js': './lib/index.js'
+          './browser-builds/standalone/httpplease.js': './lib/index.js'
       plugins:
         options:
           bundleOptions:
-            standalone: 'httprequestplugins'
+            standalone: 'httppleaseplugins'
         files:
-          './browser-builds/standalone/httprequestplugins.js': './lib/plugins/index.js'
+          './browser-builds/standalone/httppleaseplugins.js': './lib/plugins/index.js'
     uglify:
       browserbuilds:
         files: [
@@ -120,5 +120,5 @@ module.exports = (grunt) ->
     # Sets globals for the server tests so we can use the same module for
     # browser tests.
     GLOBAL.chai = require 'chai'
-    GLOBAL.httprequest = require './src/index'
-    GLOBAL.httprequestplugins = require './src/plugins'
+    GLOBAL.httpplease = require './src/index'
+    GLOBAL.httppleaseplugins = require './src/plugins'

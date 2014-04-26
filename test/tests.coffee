@@ -1,10 +1,10 @@
 assert = chai.assert
-request = httprequest
-plugins = httprequestplugins
+request = httpplease
+plugins = httppleaseplugins
 
 testServerUrl = 'http://localhost:4001'
 
-describe 'httprequest', ->
+describe 'httpplease', ->
   it 'performs a get request', (done) ->
     request.get "#{ testServerUrl }/getjson", (err, res) ->
       assert.equal res.text, JSON.stringify(hello: 'world')
