@@ -23,7 +23,7 @@ httprequest.get('http://example.com', function(err, res) {
 });
 ```
 
-Alternatively, you can specify an options object as the first parameter:
+Alternatively, you can pass a request object as the first parameter:
 
 ```javascript
 httprequest.get({url: 'http://example.com'}, function(err, res) {
@@ -31,7 +31,7 @@ httprequest.get({url: 'http://example.com'}, function(err, res) {
 });
 ```
 
-If you'd rather pass the request method as a parameter, that's okay too:
+If you'd rather include the method in the object, that's okay too:
 
 ```javascript
 httprequest({method: 'GET', url: 'http://example.com'}, function(err, res) {
@@ -60,9 +60,9 @@ The following options are supported:
 </table>
 
 
-### The result object
+### The response object
 
-The result object passed to your callback in the event of a successful request
+The response object passed to your callback in the event of a successful request
 has the following properties:
 
 <table>
@@ -73,6 +73,10 @@ has the following properties:
     <tr>
         <td><code>text</code></td>
         <td>The response text.</td>
+    </tr>
+    <tr>
+        <td><code>request</code></td>
+        <td>An object representing the request.</td>
     </tr>
     <tr>
         <td><code>xhr</code></td>

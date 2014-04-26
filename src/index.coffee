@@ -16,7 +16,7 @@ request = (req, cb) ->
   # one time).
   done = once delay (err) ->
     xhr.onload = xhr.onerror = xhr.onreadystatechange = xhr.ontimeout = xhr.onprogress = null
-    cb err, if err then null else new Response xhr
+    cb err, if err then null else new Response req
 
   # When the request completes, continue.
   xhr.onreadystatechange = ->
@@ -36,6 +36,8 @@ request = (req, cb) ->
   # See http://social.msdn.microsoft.com/Forums/ie/en-US/30ef3add-767c-4436-b8a9-f1ca19b4812e/ie9-rtm-xdomainrequest-issued-requests-may-abort-if-all-event-handlers-not-specified?forum=iewebdevelopment
   xhr.ontimeout = ->
   xhr.onprogress = ->
+
+  req.xhr = xhr
 
   # Send the request. Since old versions of IE will fail on UTF8 paths, we
   # try to intelligently escape the URL (being careful not to double escape
