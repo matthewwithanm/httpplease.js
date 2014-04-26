@@ -6,7 +6,7 @@ Request = require './request'
 once = require 'once'
 
 
-factory = ->
+factory = (plugins) ->
   request = (req, cb) ->
     req = new Request req
 
@@ -68,12 +68,9 @@ factory = ->
         req.method = method
         request req, cb
 
-  request.plugins = []
+  request.plugins = plugins or []
 
-  request.use = (plugins...) ->
-    newRequest = factory()
-    newRequest.plugins = @plugins.concat plugins
-    newRequest
+  request.use = (plugins...) -> factory request.plugins.concat plugins
 
   request
 
