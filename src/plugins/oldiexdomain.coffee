@@ -26,7 +26,7 @@ module.exports =
     # use XDomainRequest so that users know there's an issue right away, instead
     # of if/when they test in IE9.
     if req.headers
-      for own k, v of req.headers
+      for own k of req.headers
         throw new Error "You can't provide request headers when using the oldiexdomain plugin."
 
     # Don't do anything if we can't do anything (:
