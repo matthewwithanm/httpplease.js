@@ -289,9 +289,18 @@ objects that implement one or more of the following methods:
 * [httpify] \(wraps xhr and [request]\)
 
 
+## Thanks
+
+This project is mostly just a small wrapper around XMLHttpRequest and an (I
+hope) sensible structure for extending functionality. The reason it works on the
+server is because of [driverdan]'s awesome [node-XMLHttpRequest] library—it's
+the secret sauce that makes the browser-focused design of httpplease possible!
+
+
 [browserify]: http://browserify.org
 [webpack]: http://webpack.github.io
 [Bower]: http://bower.io
+[driverdan]: https://github.com/driverdan
 [node-XMLHttpRequest]: https://github.com/driverdan/node-XMLHttpRequest
 [xhr]: https://github.com/Raynos/xhr
 [httpify]: https://github.com/scottcorgan/httpify
