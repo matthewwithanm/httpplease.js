@@ -1,26 +1,14 @@
 createXHR = require './createXHR'
 {createError} = require './errors'
+Request = require './Request'
 Response = require './Response'
 once = require 'once'
 delay = require './delay'
-extend = require 'xtend'
 
 
-parseOpts = (optsOrUrl) ->
-  opts =
-    if typeof optsOrUrl is 'string' then url: optsOrUrl
-    else optsOrUrl
-  defaults =
-    method: 'GET'
-  opts = extend defaults, opts
-  opts.method = opts.method.toUpperCase()
-  opts.url = opts.url
-  opts
-
-
-request = (optsOrUrl, cb) ->
-  opts = parseOpts optsOrUrl
-  xhr = createXHR opts.url
+request = (req, cb) ->
+  req = new Request req
+  xhr = createXHR req.url
 
   # Because XHR can be an XMLHttpRequest or an XDomainRequest, we add
   # `onreadystatechange`, `onload`, and `onerror` callbacks. We use the
@@ -52,15 +40,16 @@ request = (optsOrUrl, cb) ->
   # Send the request. Since old versions of IE will fail on UTF8 paths, we
   # try to intelligently escape the URL (being careful not to double escape
   # anything).
-  xhr.open opts.method, opts.url.replace /[^%]+/g, (s) -> encodeURI s
+  xhr.open req.method, req.url.replace /[^%]+/g, (s) -> encodeURI s
   xhr.send()
 
 
 for method in ['get', 'post', 'put', 'head', 'patch', 'delete']
   do (method) ->
-    request[method] = (optsOrUrl, cb) ->
-      opts = extend parseOpts(optsOrUrl), {method}
-      request opts, cb
+    request[method] = (req, cb) ->
+      req = new Request req
+      req.method = method
+      request req, cb
 
 
 module.exports = request
