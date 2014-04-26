@@ -107,6 +107,10 @@ to your callback. It has the following properties:
         <td>A description of the error.</td>
     </tr>
     <tr>
+        <td><code>request</code></td>
+        <td>An object representing the request.</td>
+    </tr>
+    <tr>
         <td><code>xhr</code></td>
         <td>The XHR or XDomain object used to make the request.</td>
     </tr>

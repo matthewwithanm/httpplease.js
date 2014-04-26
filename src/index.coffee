@@ -28,14 +28,14 @@ factory = ->
       if xhr.readyState is 4
         switch xhr.status.toString()[...1]
           when '2' then done()
-          when '4' then done createError 'Client Error', xhr
-          when '5' then done createError 'Server Error', xhr
-          else done createError 'HTTP Error', xhr
+          when '4' then done createError 'Client Error', req
+          when '5' then done createError 'Server Error', req
+          else done createError 'HTTP Error', req
 
     # `onload` is only called on success and, in IE, will be called without
     # `xhr.status` having been set, so we don't check it.
     xhr.onload = -> done()
-    xhr.onerror = -> done createError 'Internal XHR Error', xhr
+    xhr.onerror = -> done createError 'Internal XHR Error', req
 
     # IE sometimes fails if you don't specify every handler.
     # See http://social.msdn.microsoft.com/Forums/ie/en-US/30ef3add-767c-4436-b8a9-f1ca19b4812e/ie9-rtm-xdomainrequest-issued-requests-may-abort-if-all-event-handlers-not-specified?forum=iewebdevelopment

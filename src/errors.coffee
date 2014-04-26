@@ -3,8 +3,10 @@ class HttpError extends Error
   constructor: (@message) ->
 
 
-createError = (message, xhr) ->
+createError = (message, request) ->
   err = new HttpError message
+  xhr = request.xhr
+  err.request = request
   err.status = xhr.status or 0
   err.xhr = xhr
   err
