@@ -172,10 +172,12 @@ create multiple instances, each with their own plugins:
 
 ```javascript
 var request = httprequest.use(oldiexdomain);
-var request2 = httprequest;
 
-request.get('http://example.com', function(err, res) { ... }); // "oldiexdomain" plugin is used.
-request2.get('http://example.com', function(err, res) { ... }); // No plugins are used.
+request
+  .use(myPlugin)
+  .get('http://example.com', function(err, res) { ... }); // Uses "oldiexdomain" plugin and "myPlugin".
+request.get('http://example.com', function(err, res) { ... }); // Only uses "oldiexdomain" plugin.
+httprequest.get('http://example.com', function(err, res) { ... }); // No extra plugins are used.
 ```
 
 You can use as many plugins as you want—either by passing multiple plugins to
