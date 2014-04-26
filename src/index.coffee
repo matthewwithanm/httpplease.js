@@ -69,8 +69,7 @@ factory = (defaults, plugins) ->
   request.plugins = plugins or []
   request.defaults = defaults
 
-  request.use = (plugins...) ->
-    factory request.defaults, request.plugins.concat plugins
+  request.use = (plugins...) -> factory @defaults, @plugins.concat plugins
 
   request.bare = -> factory()
 
