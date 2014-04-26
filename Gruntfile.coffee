@@ -42,11 +42,15 @@ module.exports = (grunt) ->
           rename: coffeeRename
         ]
     connect:
+      options:
+        port: TEST_SERVER_PORT
+        base: '.'
       tests:
         options:
-          port: TEST_SERVER_PORT
-          base: '.'
-          keepalive: grunt.option('keepalive')?
+          keepalive: false
+      testskeepalive:
+        options:
+          keepalive: true
     express:
       testserver:
         options:
@@ -101,9 +105,10 @@ module.exports = (grunt) ->
   grunt.registerTask 'build:browsertests', ['coffee:browsertests']
   grunt.registerTask 'build:standalone', ['build:node', 'browserify:standalone', 'uglify:browserbuilds']
   grunt.registerTask 'default', ['build']
-  grunt.registerTask 'test:browser', ['build:browsertests', 'build:standalone', 'runtestserver', 'connect:tests', 'mocha']
+  grunt.registerTask 'test:phantom', ['build:browsertests', 'build:standalone', 'runtestserver', 'connect:tests', 'mocha']
+  grunt.registerTask 'test:browser', ['build:browsertests', 'build:standalone', 'runtestserver', 'connect:testskeepalive', 'express-keepalive']
   grunt.registerTask 'test:server', ['runtestserver', 'settestglobals', 'mochaTest']
-  grunt.registerTask 'test', ['test:browser', 'settestglobals', 'mochaTest']
+  grunt.registerTask 'test', ['test:phantom', 'settestglobals', 'mochaTest']
   grunt.registerTask 'runtestserver', ['express:testserver']
   grunt.registerTask 'settestglobals', ->
     # Sets globals for the server tests so we can use the same module for
