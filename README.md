@@ -100,10 +100,10 @@ The request object supports the following properties:
 ### The error object
 
 In the event of an error, an error object will be passed as the first argument
-to your callback. Error objects have all of the properties that a response
-object has (listed below), but are also JS Error objects (which can be useful if
-relying on instanceof checks). They also have one additional
-property—`message`—which contains a description of the error.
+to your callback. If the error is an HTTP error, it will have all of the
+properties that a response object has (listed below), but will be a JS Error
+object (which can be useful if relying on instanceof checks). It also has one
+additional property—`message`—which contains a description of the error.
 
 
 ### The response object
