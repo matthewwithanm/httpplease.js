@@ -31,12 +31,12 @@ factory = (defaults = {}, plugins = []) ->
     # When the request completes, continue.
     xhr.onreadystatechange = ->
       if xhr.readyState is 4
-        switch xhr.status.toString()[...1]
-          when '2' then done()
-          when '4'
+        switch Math.floor xhr.status / 100
+          when 2 then done()
+          when 4
             if req.errorOn404 then done createError 'Client Error', req
             else done()
-          when '5' then done createError 'Server Error', req
+          when 5 then done createError 'Server Error', req
           else done createError 'HTTP Error', req
 
     # `onload` is only called on success and, in IE, will be called without
