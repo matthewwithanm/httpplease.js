@@ -18,3 +18,11 @@ describe 'httprequest', ->
       json = JSON.parse res.text
       assert.equal json.hello, 'world'
       done()
+
+  describe 'use', ->
+    it 'adds a plugin', ->
+      assert.equal request.use({}).plugins.length, 1
+
+    it "doesn't mutate the request function", ->
+      request.use {}
+      assert.equal request.plugins.length, 0
