@@ -181,6 +181,15 @@ are built in:
             <code>XDomainRequest</code> object when necessary.
         </td>
     </tr>
+    <tr>
+        <td>oldieactivex</td>
+        <td>No</td>
+        <td>
+            For
+            <a href="http://en.wikipedia.org/wiki/XMLHttpRequest#Support_in_Internet_Explorer_versions_5.2C_5.5.2C_and_6">super old versions of IE</a>
+            that didn't define XMLHttpRequest, use an ActiveX object.
+        </td>
+    </tr>
 </table>
 
 Plugins are enabled with the `use` method:
