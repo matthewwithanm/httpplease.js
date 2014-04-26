@@ -7,6 +7,13 @@ class Response
     @status = xhr.status or 0
     @text = xhr.responseText
     @contentType = xhr.contentType or xhr.getResponseHeader? 'Content-Type'
+    @headers = do ->
+      headers = {}
+      if lines = xhr.getAllResponseHeaders?().split '\n'
+        for header in lines
+          if m = header.match /\s+([^\s]+):\s+([^\s]+)/
+            headers[m[1]] = m[2]
+      headers
 
 
 module.exports = Response

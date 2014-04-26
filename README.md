@@ -88,6 +88,10 @@ has the following properties:
         <td>The content type of the response.</td>
     </tr>
     <tr>
+        <td><code>headers</code></td>
+        <td>An object containing the parsed response headers.</td>
+    </tr>
+    <tr>
         <td><code>request</code></td>
         <td>An object representing the request.</td>
     </tr>
