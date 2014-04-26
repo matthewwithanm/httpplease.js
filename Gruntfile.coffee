@@ -16,6 +16,14 @@ module.exports = (grunt) ->
             standalone: 'httprequest'
         files:
           './browser-builds/standalone/httprequest.js': './lib/index.js'
+    uglify:
+      browserbuilds:
+        files: [
+          expand: true
+          cwd: './browser-builds/'
+          src: '**/*.js'
+          dest: './browser-builds/'
+        ]
     coffee:
       compile:
         files: [
@@ -85,12 +93,13 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-mocha-test'
   grunt.loadNpmTasks 'grunt-bump'
   grunt.loadNpmTasks 'grunt-browserify'
+  grunt.loadNpmTasks 'grunt-contrib-uglify'
 
   # Define tasks.
   grunt.registerTask 'build', ['build:node', 'build:standalone']
   grunt.registerTask 'build:node', ['coffee']
   grunt.registerTask 'build:browsertests', ['coffee:browsertests']
-  grunt.registerTask 'build:standalone', ['build:node', 'browserify:standalone']
+  grunt.registerTask 'build:standalone', ['build:node', 'browserify:standalone', 'uglify:browserbuilds']
   grunt.registerTask 'default', ['build']
   grunt.registerTask 'test:browser', ['build:browsertests', 'build:standalone', 'runtestserver', 'connect:tests', 'mocha']
   grunt.registerTask 'test:server', ['runtestserver', 'settestglobals', 'mochaTest']
