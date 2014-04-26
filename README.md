@@ -162,7 +162,7 @@ Or, if you're using the standalone build:
 <script src="httprequestplugins.js" type="text/javascript"></script>
 ```
 
-``javascript
+```javascript
 var oldiexdomain = httprequestplugins.oldiexdomain;
 httprequest = httprequest.use(oldiexdomain);
 ```
