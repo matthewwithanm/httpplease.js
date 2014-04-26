@@ -6,6 +6,7 @@ class Response
     @xhr = xhr
     @status = xhr.status or 0
     @text = xhr.responseText
+    @body = xhr.response or xhr.responseText
     @contentType = xhr.contentType or xhr.getResponseHeader? 'Content-Type'
     @headers = do ->
       headers = {}

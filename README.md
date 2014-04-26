@@ -85,7 +85,16 @@ has the following properties:
     </tr>
     <tr>
         <td><code>text</code></td>
-        <td>The response text.</td>
+        <td>The raw response text.</td>
+    </tr>
+    <tr>
+        <td><code>body</code></td>
+        <td>
+            The processed response body. Depending on the content type of the
+            response and the plugins being used, this may be the same as
+            `response.text` (a string) or some other object (like a parsed JSON
+            object).
+        </td>
     </tr>
     <tr>
         <td><code>contentType</code></td>
