@@ -33,7 +33,7 @@
 
 }).call(this);
 
-},{"urllite/lib/core":5}],2:[function(_dereq_,module,exports){
+},{"urllite/lib/core":6}],2:[function(_dereq_,module,exports){
 (function() {
   var delay,
     __slice = [].slice;
@@ -55,11 +55,45 @@
 
 },{}],3:[function(_dereq_,module,exports){
 (function() {
-  var HttpError, Response, createXHR, delay, extend, httpError, method, once, parseOpts, request, _fn, _i, _len, _ref,
+  var HttpError, createError,
     __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
+  HttpError = (function(_super) {
+    __extends(HttpError, _super);
+
+    HttpError.prototype.name = 'HttpError';
+
+    function HttpError(message) {
+      this.message = message;
+    }
+
+    return HttpError;
+
+  })(Error);
+
+  createError = function(message, xhr) {
+    var err;
+    err = new HttpError(message);
+    err.status = xhr.status || 0;
+    err.xhr = xhr;
+    return err;
+  };
+
+  module.exports = {
+    HttpError: HttpError,
+    createError: createError
+  };
+
+}).call(this);
+
+},{}],4:[function(_dereq_,module,exports){
+(function() {
+  var Response, createError, createXHR, delay, extend, method, once, parseOpts, request, _fn, _i, _len, _ref;
+
   createXHR = _dereq_('./createXHR');
+
+  createError = _dereq_('./errors').createError;
 
   once = _dereq_('once');
 
@@ -81,30 +115,9 @@
     return opts;
   };
 
-  HttpError = (function(_super) {
-    __extends(HttpError, _super);
-
-    HttpError.prototype.name = 'HttpError';
-
-    function HttpError(message) {
-      this.message = message;
-    }
-
-    return HttpError;
-
-  })(Error);
-
-  httpError = function(message, xhr) {
-    var err;
-    err = new HttpError(message);
-    err.status = xhr.status || 0;
-    err.request = xhr;
-    return err;
-  };
-
   Response = (function() {
     function Response(xhr) {
-      this.request = xhr;
+      this.xhr = xhr;
       this.status = xhr.status || 0;
       this.text = xhr.responseText;
     }
@@ -127,11 +140,11 @@
           case '2':
             return done();
           case '4':
-            return done(httpError('Client Error', xhr));
+            return done(createError('Client Error', xhr));
           case '5':
-            return done(httpError('Server Error', xhr));
+            return done(createError('Server Error', xhr));
           default:
-            return done(httpError('HTTP Error', xhr));
+            return done(createError('HTTP Error', xhr));
         }
       }
     };
@@ -139,7 +152,7 @@
       return done();
     };
     xhr.onerror = function() {
-      return done(httpError('Internal XHR Error', xhr));
+      return done(createError('Internal XHR Error', xhr));
     };
     xhr.ontimeout = function() {};
     xhr.onprogress = function() {};
@@ -168,7 +181,7 @@
 
 }).call(this);
 
-},{"./createXHR":1,"./delay":2,"once":4,"xtend":6}],4:[function(_dereq_,module,exports){
+},{"./createXHR":1,"./delay":2,"./errors":3,"once":5,"xtend":7}],5:[function(_dereq_,module,exports){
 module.exports = once
 
 once.proto = once(function () {
@@ -190,7 +203,7 @@ function once (fn) {
   return f
 }
 
-},{}],5:[function(_dereq_,module,exports){
+},{}],6:[function(_dereq_,module,exports){
 (function() {
   var URL, URL_PATTERN, defaults, urllite,
     __hasProp = {}.hasOwnProperty,
@@ -273,7 +286,7 @@ function once (fn) {
 
 }).call(this);
 
-},{}],6:[function(_dereq_,module,exports){
+},{}],7:[function(_dereq_,module,exports){
 module.exports = extend
 
 function extend() {
@@ -292,6 +305,6 @@ function extend() {
     return target
 }
 
-},{}]},{},[3])
-(3)
+},{}]},{},[4])
+(4)
 });

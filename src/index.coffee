@@ -1,4 +1,5 @@
 createXHR = require './createXHR'
+{createError} = require './errors'
 once = require 'once'
 delay = require './delay'
 extend = require 'xtend'
@@ -14,18 +15,6 @@ parseOpts = (optsOrUrl) ->
   opts.method = opts.method.toUpperCase()
   opts.url = opts.url
   opts
-
-
-class HttpError extends Error
-  name: 'HttpError'
-  constructor: (@message) ->
-
-
-httpError = (message, xhr) ->
-  err = new HttpError message
-  err.status = xhr.status or 0
-  err.xhr = xhr
-  err
 
 
 class Response
@@ -51,14 +40,14 @@ request = (optsOrUrl, cb) ->
     if xhr.readyState is 4
       switch xhr.status.toString()[...1]
         when '2' then done()
-        when '4' then done httpError 'Client Error', xhr
-        when '5' then done httpError 'Server Error', xhr
-        else done httpError 'HTTP Error', xhr
+        when '4' then done createError 'Client Error', xhr
+        when '5' then done createError 'Server Error', xhr
+        else done createError 'HTTP Error', xhr
 
   # `onload` is only called on success and, in IE, will be called without
   # `xhr.status` having been set, so we don't check it.
   xhr.onload = -> done()
-  xhr.onerror = -> done httpError 'Internal XHR Error', xhr
+  xhr.onerror = -> done createError 'Internal XHR Error', xhr
 
   # IE sometimes fails if you don't specify every handler.
   # See http://social.msdn.microsoft.com/Forums/ie/en-US/30ef3add-767c-4436-b8a9-f1ca19b4812e/ie9-rtm-xdomainrequest-issued-requests-may-abort-if-all-event-handlers-not-specified?forum=iewebdevelopment
