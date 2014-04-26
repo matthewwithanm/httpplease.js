@@ -35,6 +35,13 @@ describe 'httpplease', ->
       assert.equal request.use({}).bare().plugins.length, 0
 
 describe 'plugins', ->
+  it 'is used for error responses', (done) ->
+    request
+      .use plugins.jsonparser
+      .get "#{ testServerUrl }/404", (err, res) ->
+        assert.deepEqual err.body, sad: 'panda'
+        done()
+
   describe 'jsonparser', ->
     it 'parses json responses', (done) ->
       request

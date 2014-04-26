@@ -10,5 +10,8 @@ app.get '/getjson', cors(), (req, res) ->
 app.all '/headers', cors(), (req, res) ->
   res.json req.headers
 
+app.all '/404', cors(), (req, res) ->
+  res.json 404, sad: 'panda'
+
 
 module.exports = app
