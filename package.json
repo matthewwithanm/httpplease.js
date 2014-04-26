@@ -1,6 +1,6 @@
 {
   "name": "httprequest",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Make HTTP requests in node or the browser",
   "main": "./lib/index.js",
   "browser": {
