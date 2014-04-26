@@ -22,10 +22,9 @@ factory = (plugins) ->
     # one time).
     done = once delay (err) ->
       xhr.onload = xhr.onerror = xhr.onreadystatechange = xhr.ontimeout = xhr.onprogress = null
-      unless err
-        res = new Response req
-        for plugin in request.plugins
-          plugin.processResponse? res
+      res = if err?.isHttpError then err else new Response req
+      for plugin in request.plugins
+        plugin.processResponse? res
       cb err, res
 
     # When the request completes, continue.

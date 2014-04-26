@@ -1,15 +1,14 @@
-class HttpError extends Error
-  name: 'HttpError'
+Response = require './response'
+
+
+class RequestError extends Error
+  name: 'RequestError'
   constructor: (@message) ->
 
-
-createError = (message, request) ->
-  err = new HttpError message
-  xhr = request.xhr
-  err.request = request
-  err.status = xhr.status or 0
-  err.xhr = xhr
+createError = (message, req) ->
+  err = new RequestError message
+  Response.call err, req # Make the error look like a response
   err
 
 
-module.exports = {HttpError, createError}
+module.exports = {RequestError, createError}

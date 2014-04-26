@@ -81,6 +81,15 @@ The request object supports the following properties:
 </table>
 
 
+### The error object
+
+In the event of an error, an error object will be passed as the first argument
+to your callback. Error objects have all of the properties that a response
+object has (listed below), but are also JS Error objects (which can be useful if
+relying on instanceof checks). They also have one additional
+property—`message`—which contains a description of the error.
+
+
 ### The response object
 
 The response object passed to your callback in the event of a successful request
@@ -113,29 +122,12 @@ has the following properties:
         <td>An object containing the parsed response headers.</td>
     </tr>
     <tr>
-        <td><code>request</code></td>
-        <td>An object representing the request.</td>
-    </tr>
-    <tr>
-        <td><code>xhr</code></td>
-        <td>The XHR or XDomain object used to make the request.</td>
-    </tr>
-</table>
-
-
-### The error object
-
-In the event of an error, an error object will be passed as the first argument
-to your callback. It has the following properties:
-
-<table>
-    <tr>
-        <td><code>status</code></td>
-        <td>The numeric status code.</td>
-    </tr>
-    <tr>
-        <td><code>message</code></td>
-        <td>A description of the error.</td>
+        <td><code>isHttpError</code></td>
+        <td>
+          A boolean that specifies whether this object represents a
+          server-reported HTTP error. This may be false—even on error objects—in
+          the case of non-HTTP errors like XDomain failures or plugin errors.
+        </td>
     </tr>
     <tr>
         <td><code>request</code></td>

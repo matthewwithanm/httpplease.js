@@ -15,6 +15,7 @@ class Response
           if m = header.match /\s+([^\s]+):\s+([^\s]+)/
             headers[m[1]] = m[2]
       headers
+    @isHttpError = @status >= 400
 
 
 module.exports = Response
