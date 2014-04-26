@@ -16,6 +16,14 @@ describe 'httpplease', ->
       assert err.isHttpError
       done()
 
+  it 'obeys the errorOn404 option', (done) ->
+    request.get
+      url: "#{ testServerUrl }/404"
+      errorOn404: false
+      (err, res) ->
+        assert.isUndefined err
+        assert res.isHttpError
+        done()
 
   it 'sends headers', (done) ->
     req =
