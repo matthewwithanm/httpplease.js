@@ -1,5 +1,6 @@
 assert = chai.assert
 request = httprequest
+plugins = httprequestplugins
 
 testServerUrl = 'http://localhost:4001'
 
@@ -32,3 +33,12 @@ describe 'httprequest', ->
   describe 'bare', ->
     it 'creates a request function without plugins', ->
       assert.equal request.use({}).bare().plugins.length, 0
+
+describe 'plugins', ->
+  describe 'jsonparser', ->
+    it 'parses json responses', (done) ->
+      request
+        .use plugins.jsonparser
+        .get "#{ testServerUrl }/getjson", (err, res) ->
+          assert.deepEqual res.body, hello: 'world'
+          done()

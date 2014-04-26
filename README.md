@@ -152,6 +152,14 @@ are built in:
         <th>Description</th>
     </tr>
     <tr>
+        <td>jsonparser</td>
+        <td>No</td>
+        <td>
+            Converts JSON responses into JS objects on
+            <code>response.body</code>.
+        </td>
+    </tr>
+    <tr>
         <td>cleanurl</td>
         <td>Yes</td>
         <td>
