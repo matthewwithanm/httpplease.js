@@ -10,7 +10,8 @@
     "xhr",
     "request",
     "http",
-    "XMLHttpRequest"
+    "XMLHttpRequest",
+    "isomorphic"
   ],
   "license": "MIT",
   "homepage": "https://github.com/matthewwithanm/httpplease.js",

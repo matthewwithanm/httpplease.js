@@ -44,7 +44,8 @@
     "xhr",
     "request",
     "http",
-    "XMLHttpRequest"
+    "XMLHttpRequest",
+    "isomorphic"
   ],
   "author": "Matthew Dapena-Tretter <m@tthewwithanm.com>",
   "license": "MIT",
