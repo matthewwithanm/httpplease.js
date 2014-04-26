@@ -1,5 +1,22 @@
 !function(e){if("object"==typeof exports)module.exports=e();else if("function"==typeof define&&define.amd)define(e);else{var f;"undefined"!=typeof window?f=window:"undefined"!=typeof global?f=global:"undefined"!=typeof self&&(f=self),f.httprequest=e()}}(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(_dereq_,module,exports){
 (function() {
+  var Response;
+
+  module.exports = Response = (function() {
+    function Response(xhr) {
+      this.xhr = xhr;
+      this.status = xhr.status || 0;
+      this.text = xhr.responseText;
+    }
+
+    return Response;
+
+  })();
+
+}).call(this);
+
+},{}],2:[function(_dereq_,module,exports){
+(function() {
   var createXHR, urllite;
 
   urllite = _dereq_('urllite/lib/core');
@@ -33,7 +50,7 @@
 
 }).call(this);
 
-},{"urllite/lib/core":6}],2:[function(_dereq_,module,exports){
+},{"urllite/lib/core":7}],3:[function(_dereq_,module,exports){
 (function() {
   var delay,
     __slice = [].slice;
@@ -53,7 +70,7 @@
 
 }).call(this);
 
-},{}],3:[function(_dereq_,module,exports){
+},{}],4:[function(_dereq_,module,exports){
 (function() {
   var HttpError, createError,
     __hasProp = {}.hasOwnProperty,
@@ -87,13 +104,15 @@
 
 }).call(this);
 
-},{}],4:[function(_dereq_,module,exports){
+},{}],5:[function(_dereq_,module,exports){
 (function() {
   var Response, createError, createXHR, delay, extend, method, once, parseOpts, request, _fn, _i, _len, _ref;
 
   createXHR = _dereq_('./createXHR');
 
   createError = _dereq_('./errors').createError;
+
+  Response = _dereq_('./Response');
 
   once = _dereq_('once');
 
@@ -114,17 +133,6 @@
     opts.url = opts.url;
     return opts;
   };
-
-  Response = (function() {
-    function Response(xhr) {
-      this.xhr = xhr;
-      this.status = xhr.status || 0;
-      this.text = xhr.responseText;
-    }
-
-    return Response;
-
-  })();
 
   request = function(optsOrUrl, cb) {
     var done, opts, xhr;
@@ -181,7 +189,7 @@
 
 }).call(this);
 
-},{"./createXHR":1,"./delay":2,"./errors":3,"once":5,"xtend":7}],5:[function(_dereq_,module,exports){
+},{"./Response":1,"./createXHR":2,"./delay":3,"./errors":4,"once":6,"xtend":8}],6:[function(_dereq_,module,exports){
 module.exports = once
 
 once.proto = once(function () {
@@ -203,7 +211,7 @@ function once (fn) {
   return f
 }
 
-},{}],6:[function(_dereq_,module,exports){
+},{}],7:[function(_dereq_,module,exports){
 (function() {
   var URL, URL_PATTERN, defaults, urllite,
     __hasProp = {}.hasOwnProperty,
@@ -286,7 +294,7 @@ function once (fn) {
 
 }).call(this);
 
-},{}],7:[function(_dereq_,module,exports){
+},{}],8:[function(_dereq_,module,exports){
 module.exports = extend
 
 function extend() {
@@ -305,6 +313,6 @@ function extend() {
     return target
 }
 
-},{}]},{},[4])
-(4)
+},{}]},{},[5])
+(5)
 });

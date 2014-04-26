@@ -1,5 +1,6 @@
 createXHR = require './createXHR'
 {createError} = require './errors'
+Response = require './Response'
 once = require 'once'
 delay = require './delay'
 extend = require 'xtend'
@@ -16,12 +17,6 @@ parseOpts = (optsOrUrl) ->
   opts.url = opts.url
   opts
 
-
-class Response
-  constructor: (xhr) ->
-    @xhr = xhr
-    @status = xhr.status or 0
-    @text = xhr.responseText
 
 request = (optsOrUrl, cb) ->
   opts = parseOpts optsOrUrl
