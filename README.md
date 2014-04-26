@@ -42,7 +42,7 @@ httprequest({method: 'GET', url: 'http://example.com'}, function(err, res) {
 
 ### Supported options
 
-The following options are supported:
+The request object supports the following properties:
 
 <table>
     <tr>
@@ -56,6 +56,13 @@ The following options are supported:
     <tr>
         <td><code>method</code></td>
         <td>The HTTP method to use for the request.</td>
+    </tr>
+    <tr>
+        <td><code>headers</code></td>
+        <td>
+            An object containing HTTP headers to send, for example:
+            <code>{Accept: '*/*'}</code>.
+        </td>
     </tr>
 </table>
 
