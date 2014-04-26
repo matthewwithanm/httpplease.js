@@ -84,6 +84,10 @@ has the following properties:
         <td>The response text.</td>
     </tr>
     <tr>
+        <td><code>contentType</code></td>
+        <td>The content type of the response.</td>
+    </tr>
+    <tr>
         <td><code>request</code></td>
         <td>An object representing the request.</td>
     </tr>
