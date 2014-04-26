@@ -40,7 +40,7 @@ httprequest({method: 'GET', url: 'http://example.com'}, function(err, res) {
 ```
 
 
-### Supported options
+### The request object
 
 The request object supports the following properties:
 
