@@ -43,6 +43,10 @@ request = (req, cb) ->
   # try to intelligently escape the URL (being careful not to double escape
   # anything).
   xhr.open req.method, req.url.replace /[^%]+/g, (s) -> encodeURI s
+
+  for own k, v of req.headers
+    xhr.setRequestHeader k, v
+
   xhr.send()
 
 

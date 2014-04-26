@@ -7,6 +7,7 @@ class Request
 
     @method = opts.method?.toUpperCase() or 'GET'
     @url = opts.url
+    @headers = opts.headers or {}
 
 
 module.exports = Request
