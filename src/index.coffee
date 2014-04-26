@@ -1,8 +1,8 @@
-createXHR = require './createXHR'
+createXHR = require './createxhr'
 delay = require './delay'
 {createError} = require './errors'
-Response = require './Response'
-Request = require './Request'
+Response = require './response'
+Request = require './request'
 once = require 'once'
 
 

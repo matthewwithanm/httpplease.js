@@ -4,7 +4,7 @@
   "description": "Make HTTP requests in node or the browser",
   "main": "./lib/index.js",
   "browser": {
-    "./lib/createXHR.js": "./lib/createXHR-browser.js"
+    "./lib/createxhr.js": "./lib/createxhr-browser.js"
   },
   "directories": {
     "test": "test"
