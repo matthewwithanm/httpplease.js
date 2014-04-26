@@ -4,12 +4,13 @@ delay = require './delay'
 {create: createError} = require './error'
 Response = require './response'
 Request = require './request'
+extend = require 'xtend'
 once = require 'once'
 
 
-factory = (plugins) ->
+factory = (defaults, plugins) ->
   request = (req, cb) ->
-    req = new Request req
+    req = new Request extend request.defaults, req
 
     # Give the plugins a chance to create the XHR object
     for plugin in request.plugins
@@ -66,11 +67,13 @@ factory = (plugins) ->
         request req, cb
 
   request.plugins = plugins or []
+  request.defaults = defaults
 
-  request.use = (plugins...) -> factory request.plugins.concat plugins
+  request.use = (plugins...) ->
+    factory request.defaults, request.plugins.concat plugins
 
   request.bare = -> factory()
 
   request
 
-module.exports = factory [cleanURL]
+module.exports = factory {}, [cleanURL]
