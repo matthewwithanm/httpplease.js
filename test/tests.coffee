@@ -10,6 +10,13 @@ describe 'httpplease', ->
       assert.equal res.text, JSON.stringify(hello: 'world')
       done()
 
+  it 'identifies errors', (done) ->
+    request.get "#{ testServerUrl }/404", (err, res) ->
+      assert.equal err.status, 404
+      assert err.isHttpError
+      done()
+
+
   it 'sends headers', (done) ->
     req =
       url: "#{ testServerUrl }/headers"
