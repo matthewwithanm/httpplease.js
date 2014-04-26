@@ -21,8 +21,10 @@ describe 'httprequest', ->
 
   describe 'use', ->
     it 'adds a plugin', ->
-      assert.equal request.use({}).plugins.length, 1
+      startCount = request.plugins.length
+      assert.equal request.use({}).plugins.length, startCount + 1
 
     it "doesn't mutate the request function", ->
+      startCount = request.plugins.length
       request.use {}
-      assert.equal request.plugins.length, 0
+      assert.equal request.plugins.length, startCount
