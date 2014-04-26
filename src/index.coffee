@@ -8,9 +8,9 @@ extend = require 'xtend'
 once = require 'once'
 
 
-factory = (defaults, plugins) ->
+factory = (defaults = {}, plugins = []) ->
   request = (req, cb) ->
-    req = new Request extend request.defaults(), req
+    req = new Request extend defaults, req
 
     # Give the plugins a chance to create the XHR object
     for plugin in request.plugins
@@ -71,10 +71,10 @@ factory = (defaults, plugins) ->
   request.plugins = plugins or []
 
   request.defaults = (newValues) ->
-    if newValues then factory extend(@defaults(), newValues), @plugins
+    if newValues then factory extend(defaults, newValues), @plugins
     else defaults
 
-  request.use = (plugins...) -> factory @defaults(), @plugins.concat plugins
+  request.use = (plugins...) -> factory defaults, @plugins.concat plugins
 
   request.bare = -> factory()
 
