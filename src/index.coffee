@@ -33,7 +33,9 @@ factory = (defaults, plugins) ->
       if xhr.readyState is 4
         switch xhr.status.toString()[...1]
           when '2' then done()
-          when '4' then done createError 'Client Error', req
+          when '4'
+            if req.errorOn404 then done createError 'Client Error', req
+            else done()
           when '5' then done createError 'Server Error', req
           else done createError 'HTTP Error', req
 

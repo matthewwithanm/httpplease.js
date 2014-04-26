@@ -9,6 +9,7 @@ class Request
     @url = opts.url
     @headers = opts.headers or {}
     @body = opts.body
+    @errorOn404 = opts.errorOn404 ? true
 
 
 module.exports = Request
