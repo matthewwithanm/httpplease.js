@@ -28,3 +28,7 @@ describe 'httprequest', ->
       startCount = request.plugins.length
       request.use {}
       assert.equal request.plugins.length, startCount
+
+  describe 'bare', ->
+    it 'creates a request function without plugins', ->
+      assert.equal request.use({}).bare().plugins.length, 0

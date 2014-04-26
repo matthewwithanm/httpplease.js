@@ -188,7 +188,15 @@ var request = httprequest
 ```
 
 In order to keep your builds as small as possible, **most plugins aren't enabled
-by default**. (See the table above.)
+by default**. (See the table above.) However, some small plugins are. If you
+want to disable all plugins, use the `bare()` method:
+
+```javascript
+var request = httprequest.bare();
+```
+
+Like `use()`, this method also returns a new httprequest instance so you can
+continue to use the old object with the original plugins intact.
 
 
 #### Custom Plugins

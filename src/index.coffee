@@ -70,6 +70,8 @@ factory = (plugins) ->
 
   request.use = (plugins...) -> factory request.plugins.concat plugins
 
+  request.bare = -> factory()
+
   request
 
 module.exports = factory [cleanURL]
