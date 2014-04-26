@@ -1,11 +1,12 @@
 httprequest.js
 ==============
 
-httprequest is a wrapper around XMLHttpRequest with the following major
+httprequest is a wrapper around XMLHttpRequest with the following awesome
 features:
 
 * Works in the browser and nodejs (thanks to [node-XMLHttpRequest])
 * Supports cross-domain requests in older versions of IE9 transparently
+* Extensible via a simple but powerful plugin system
 
 [browserify] users can simply `npm install httprequest`.
 
