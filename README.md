@@ -285,6 +285,7 @@ objects that implement one or more of the following methods:
 ## Similar Projects
 
 * [xhr] \(browser only\)
+* [request] \(node only\)
 * [httpify] \(wraps xhr and [request]\)
 
 
