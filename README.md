@@ -9,7 +9,7 @@ features:
 * Supports cross-domain requests in older versions of IE9 transparently with the
   [oldiexdomain plugin](#plugins)
 
-[browserify] users can simply `npm install httprequest`.
+[browserify] and [webpack] users can simply `npm install httprequest`.
 
 Minified and gzipped, the standalone browser build is ~2K.
 
@@ -272,6 +272,7 @@ objects that implement one or more of the following methods:
 
 
 [browserify]: http://browserify.org
+[webpack]: http://webpack.github.io
 [node-XMLHttpRequest]: https://github.com/driverdan/node-XMLHttpRequest
 [xhr]: https://github.com/Raynos/xhr
 [httpify]: https://github.com/scottcorgan/httpify
