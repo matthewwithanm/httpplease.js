@@ -180,8 +180,8 @@ are built in:
 Plugins are enabled with the `use` method:
 
 ```javascript
-var oldiexdomain = require('httprequest/lib/plugins/oldiexdomain');
-httprequest = httprequest.use(oldiexdomain);
+var jsonparser = require('httprequest/lib/plugins/jsonparser');
+httprequest = httprequest.use(jsonparser);
 ```
 
 Or, if you're using the standalone build:
@@ -192,20 +192,20 @@ Or, if you're using the standalone build:
 ```
 
 ```javascript
-var oldiexdomain = httprequestplugins.oldiexdomain;
-httprequest = httprequest.use(oldiexdomain);
+var jsonparser = httprequestplugins.jsonparser;
+httprequest = httprequest.use(jsonparser);
 ```
 
 Notice that `use` returns a new httprequest instance. This is so that you can
 create multiple instances, each with their own plugins:
 
 ```javascript
-var request = httprequest.use(oldiexdomain);
+var request = httprequest.use(jsonparser);
 
 request
-  .use(myPlugin)
-  .get('http://example.com', function(err, res) { ... }); // Uses "oldiexdomain" plugin and "myPlugin".
-request.get('http://example.com', function(err, res) { ... }); // Only uses "oldiexdomain" plugin.
+  .use(oldiexdomain)
+  .get('http://example.com', function(err, res) { ... }); // Uses "jsonparser" plugin and "oldiexdomain".
+request.get('http://example.com', function(err, res) { ... }); // Only uses "jsonparser" plugin.
 httprequest.get('http://example.com', function(err, res) { ... }); // No extra plugins are used.
 ```
 
@@ -214,7 +214,7 @@ You can use as many plugins as you want—either by passing multiple plugins to
 
 ```javascript
 var request = httprequest
-  .use(oldiexdomain, myPlugin, myOtherPlugin)
+  .use(jsonparser, oldiexdomain, myPlugin)
   .use(anotherPlugin);
 ```
 
