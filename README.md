@@ -1,12 +1,15 @@
 httprequest.js
 ==============
 
-httprequest is a wrapper around XMLHttpRequest with the following awesome
-features:
+There are a lot of JS libraries for making HTTP requests in JavaScript. Why use
+this one? Because it's awesome, that's why. And this is why it's awesome:
 
-* Works in the browser and nodejs (thanks to [node-XMLHttpRequest])
-* Extensible via a simple but powerful plugin system
-* Supports cross-domain requests in older versions of IE9 transparently with the
+* Designed for **"isomorphic" JavaScript** (supporting both client and server
+  with the same codebase)
+* …but with a **browser-driven focus** that keeps in mind the limitations of
+  that environment (filesize, old IE)
+* Extensible via a **simple but powerful plugin system** (which it dogfoods)
+* Supports **cross-domain requests in IE9** transparently with the
   [oldiexdomain plugin](#plugins)
 
 [browserify] and [webpack] users can simply `npm install httprequest`.
