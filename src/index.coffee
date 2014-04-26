@@ -13,7 +13,7 @@ factory = (defaults = {}, plugins = []) ->
     req = new Request extend defaults, req
 
     # Give the plugins a chance to create the XHR object
-    for plugin in request.plugins
+    for plugin in plugins
       if xhr = plugin?.createXHR? req then break # First come, first serve
     xhr ?= createXHR()
 
@@ -24,7 +24,7 @@ factory = (defaults = {}, plugins = []) ->
     done = once delay (err) ->
       xhr.onload = xhr.onerror = xhr.onreadystatechange = xhr.ontimeout = xhr.onprogress = null
       res = if err?.isHttpError then err else new Response req
-      for plugin in request.plugins
+      for plugin in plugins
         plugin.processResponse? res
       cb err, res
 
@@ -51,7 +51,7 @@ factory = (defaults = {}, plugins = []) ->
 
     req.xhr = xhr
 
-    for plugin in request.plugins
+    for plugin in plugins
       plugin.processRequest? req
 
     xhr.open req.method, req.url
@@ -68,13 +68,13 @@ factory = (defaults = {}, plugins = []) ->
         req.method = method
         request req, cb
 
-  request.plugins = plugins or []
+  request.plugins = -> plugins
 
   request.defaults = (newValues) ->
-    if newValues then factory extend(defaults, newValues), @plugins
+    if newValues then factory extend(defaults, newValues), plugins
     else defaults
 
-  request.use = (plugins...) -> factory defaults, @plugins.concat plugins
+  request.use = (newPlugins...) -> factory defaults, plugins.concat newPlugins
 
   request.bare = -> factory()
 

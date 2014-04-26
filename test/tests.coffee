@@ -45,17 +45,17 @@ describe 'httpplease', ->
 
   describe 'use', ->
     it 'adds a plugin', ->
-      startCount = request.plugins.length
-      assert.equal request.use({}).plugins.length, startCount + 1
+      startCount = request.plugins().length
+      assert.equal request.use({}).plugins().length, startCount + 1
 
     it "doesn't mutate the request function", ->
-      startCount = request.plugins.length
+      startCount = request.plugins().length
       request.use {}
-      assert.equal request.plugins.length, startCount
+      assert.equal request.plugins().length, startCount
 
   describe 'bare', ->
     it 'creates a request function without plugins', ->
-      assert.equal request.use({}).bare().plugins.length, 0
+      assert.equal request.use({}).bare().plugins().length, 0
 
 describe 'plugins', ->
   it 'is used for error responses', (done) ->
