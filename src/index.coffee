@@ -57,7 +57,7 @@ factory = (plugins) ->
     for own k, v of req.headers
       xhr.setRequestHeader k, v
 
-    xhr.send()
+    xhr.send req.body
 
   for method in ['get', 'post', 'put', 'head', 'patch', 'delete']
     do (request, method) ->

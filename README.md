@@ -60,6 +60,10 @@ The request object supports the following properties:
         <td>The HTTP method to use for the request.</td>
     </tr>
     <tr>
+        <td><code>body</code></td>
+        <td>The body to send with the request.</td>
+    </tr>
+    <tr>
         <td><code>headers</code></td>
         <td>
             An object containing HTTP headers to send, for example:
