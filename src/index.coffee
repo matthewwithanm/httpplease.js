@@ -1,3 +1,4 @@
+cleanURL = require './plugins/cleanurl'
 createXHR = require './createxhr'
 delay = require './delay'
 {createError} = require './errors'
@@ -51,10 +52,7 @@ factory = (plugins) ->
     for plugin in request.plugins
       plugin.processRequest? req
 
-    # Send the request. Since old versions of IE will fail on UTF8 paths, we
-    # try to intelligently escape the URL (being careful not to double escape
-    # anything).
-    xhr.open req.method, req.url.replace /[^%]+/g, (s) -> encodeURI s
+    xhr.open req.method, req.url
 
     for own k, v of req.headers
       xhr.setRequestHeader k, v
@@ -74,4 +72,4 @@ factory = (plugins) ->
 
   request
 
-module.exports = factory()
+module.exports = factory [cleanURL]

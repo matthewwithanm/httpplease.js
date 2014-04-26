@@ -127,10 +127,20 @@ are built in:
 <table>
     <tr>
         <th>Name</th>
+        <th>Enabled by Default?</th>
         <th>Description</th>
     </tr>
     <tr>
+        <td>cleanurl</td>
+        <td>Yes</td>
+        <td>
+            Encodes unencoded characters in the request URL. Required by some
+            browsers if you're using non-ASCII characters.
+        </td>
+    </tr>
+    <tr>
         <td>oldiexdomain</td>
+        <td>No</td>
         <td>
             Enables cross domain requests in IE9 by (transparently) using the
             <code>XDomainRequest</code> object when necessary.
@@ -177,8 +187,8 @@ var request = httprequest
   .use(anotherPlugin);
 ```
 
-In order to keep your builds as small as possible, no plugins are enabled by
-default.
+In order to keep your builds as small as possible, **most plugins aren't enabled
+by default**. (See the table above.)
 
 
 #### Custom Plugins
