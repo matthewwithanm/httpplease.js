@@ -78,6 +78,13 @@ The request object supports the following properties:
             <code>{Accept: '*/*'}</code>.
         </td>
     </tr>
+    <tr>
+        <td><code>errorOn404</code></td>
+        <td>
+          A boolean specifying whether a 404 response should be treated as an
+          error or not. Defaults to `true`.
+        </td>
+    </tr>
 </table>
 
 
