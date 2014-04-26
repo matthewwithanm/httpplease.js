@@ -14,6 +14,8 @@ this one? Because it's awesome, that's why. And this is why it's awesome:
 
 [browserify] and [webpack] users can simply `npm install httpplease`.
 
+[Bower] users can `bower install httpplease`.
+
 `<script>` tag fans can grab the standalone build from the "browser-builds"
 directory.
 
@@ -288,6 +290,7 @@ objects that implement one or more of the following methods:
 
 [browserify]: http://browserify.org
 [webpack]: http://webpack.github.io
+[Bower]: http://bower.io
 [node-XMLHttpRequest]: https://github.com/driverdan/node-XMLHttpRequest
 [xhr]: https://github.com/Raynos/xhr
 [httpify]: https://github.com/scottcorgan/httpify
