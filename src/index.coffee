@@ -1,7 +1,7 @@
 cleanURL = require './plugins/cleanurl'
 createXHR = require './createxhr'
 delay = require './delay'
-{createError} = require './errors'
+{create: createError} = require './error'
 Response = require './response'
 Request = require './request'
 once = require 'once'
