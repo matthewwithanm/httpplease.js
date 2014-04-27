@@ -61,6 +61,8 @@ factory = (defaults = {}, plugins = []) ->
 
     xhr.send req.body
 
+    req
+
   for method in ['get', 'post', 'put', 'head', 'patch', 'delete']
     do (http, method) ->
       http[method] = (req, cb) ->
