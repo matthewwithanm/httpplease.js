@@ -9,7 +9,7 @@ once = require 'once'
 
 
 factory = (defaults = {}, plugins = []) ->
-  request = (req, cb) ->
+  http = (req, cb) ->
     req = new Request extend defaults, req
 
     # Give the plugins a chance to create the XHR object
@@ -62,22 +62,22 @@ factory = (defaults = {}, plugins = []) ->
     xhr.send req.body
 
   for method in ['get', 'post', 'put', 'head', 'patch', 'delete']
-    do (request, method) ->
-      request[method] = (req, cb) ->
+    do (http, method) ->
+      http[method] = (req, cb) ->
         req = new Request req
         req.method = method
-        request req, cb
+        http req, cb
 
-  request.plugins = -> plugins
+  http.plugins = -> plugins
 
-  request.defaults = (newValues) ->
+  http.defaults = (newValues) ->
     if newValues then factory extend(defaults, newValues), plugins
     else defaults
 
-  request.use = (newPlugins...) -> factory defaults, plugins.concat newPlugins
+  http.use = (newPlugins...) -> factory defaults, plugins.concat newPlugins
 
-  request.bare = -> factory()
+  http.bare = -> factory()
 
-  request
+  http
 
 module.exports = factory {}, [cleanURL]

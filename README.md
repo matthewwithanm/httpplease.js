@@ -52,8 +52,8 @@ httpplease({method: 'GET', url: 'http://example.com'}, function(err, res) {
 You can create a new request function with default request object values:
 
 ```javascript
-var request = httpplease.defaults({method: 'GET', errorOn404: false});
-request('http://example.com', function(err, res) {
+var http = httpplease.defaults({method: 'GET', errorOn404: false});
+http('http://example.com', function(err, res) {
     // This request was made using the defaults specified above.
 });
 ```
@@ -225,12 +225,12 @@ Notice that `use` returns a new httpplease instance. This is so that you can
 create multiple instances, each with their own plugins:
 
 ```javascript
-var request = httpplease.use(jsonparser);
+var http = httpplease.use(jsonparser);
 
-request
+http
   .use(oldiexdomain)
   .get('http://example.com', function(err, res) { ... }); // Uses "jsonparser" plugin and "oldiexdomain".
-request.get('http://example.com', function(err, res) { ... }); // Only uses "jsonparser" plugin.
+http.get('http://example.com', function(err, res) { ... }); // Only uses "jsonparser" plugin.
 httpplease.get('http://example.com', function(err, res) { ... }); // No extra plugins are used.
 ```
 
@@ -238,7 +238,7 @@ You can use as many plugins as you want—either by passing multiple plugins to
 `use` or chaining calls:
 
 ```javascript
-var request = httpplease
+var http = httpplease
   .use(jsonparser, oldiexdomain, myPlugin)
   .use(anotherPlugin);
 ```
@@ -248,7 +248,7 @@ by default**. (See the table above.) However, some small plugins are. If you
 want to disable all plugins, use the `bare()` method:
 
 ```javascript
-var request = httpplease.bare();
+var http = httpplease.bare();
 ```
 
 Like `use()`, this method also returns a new httpplease instance so you can
