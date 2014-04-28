@@ -1,3 +1,4 @@
 {XMLHttpRequest} = require 'xmlhttprequest'
 
-module.exports = -> new XMLHttpRequest()
+
+module.exports = XMLHttpRequest

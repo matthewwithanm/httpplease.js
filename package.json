@@ -4,7 +4,7 @@
   "description": "The polite HTTP request library for node and the browser",
   "main": "./lib/index.js",
   "browser": {
-    "./lib/createxhr.js": "./lib/createxhr-browser.js"
+    "./lib/xhr.js": "./lib/xhr-browser.js"
   },
   "directories": {
     "test": "test"
