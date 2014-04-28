@@ -91,7 +91,7 @@ The request object supports the following properties:
         <td><code>errorOn404</code></td>
         <td>
           A boolean specifying whether a 404 response should be treated as an
-          error or not. Defaults to `true`.
+          error or not. Defaults to <code>true</code>.
         </td>
     </tr>
 </table>
