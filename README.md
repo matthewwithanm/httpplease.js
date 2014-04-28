@@ -49,7 +49,7 @@ httpplease({method: 'GET', url: 'http://example.com'}, function(err, res) {
 });
 ```
 
-You can create a new request function with default request object values:
+You can create a new http function with default request object values:
 
 ```javascript
 var http = httpplease.defaults({method: 'GET', errorOn404: false});
