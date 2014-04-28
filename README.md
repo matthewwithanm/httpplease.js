@@ -33,7 +33,7 @@ httpplease.get('http://example.com', function(err, res) {
 });
 ```
 
-Alternatively, you can pass a request object as the first parameter:
+Alternatively, you can pass a request options object as the first parameter:
 
 ```javascript
 httpplease.get({url: 'http://example.com'}, function(err, res) {
