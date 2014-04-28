@@ -34,8 +34,8 @@ factory = (defaults = {}, plugins = []) ->
         switch Math.floor xhr.status / 100
           when 2 then done()
           when 4
-            if req.errorOn404 then done createError 'Client Error', req
-            else done()
+            if xhr.status is 404 and not req.errorOn404 then done()
+            else done createError 'Client Error', req
           when 5 then done createError 'Server Error', req
           else done createError 'HTTP Error', req
 
