@@ -72,3 +72,19 @@ describe 'plugins', ->
         .get "#{ testServerUrl }/getjson", (err, res) ->
           assert.deepEqual res.body, hello: 'world'
           done()
+
+    parseWithContentType = (ct, isJsonType = true) ->
+      res =
+        contentType: ct
+        body: '{"hello": "world"}'
+      plugins.jsonparser.processResponse res
+      if isJsonType then assert.deepEqual res.body, hello: 'world'
+      else assert.equal res.body, '{"hello": "world"}'
+
+    it 'honors the content type', ->
+      parseWithContentType 'application/json'
+      parseWithContentType 'text/json'
+      parseWithContentType 'text/json'
+      parseWithContentType 'text/something+json'
+      parseWithContentType 'application/json; charset=utf-8'
+      parseWithContentType 'application/jsonp', false
