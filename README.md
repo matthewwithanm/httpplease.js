@@ -138,6 +138,15 @@ has the following properties:
         <td>An object containing the parsed response headers.</td>
     </tr>
     <tr>
+        <td><code>header</code></td>
+        <td>
+            A method for looking up the value of a specific header. This takes
+            into account the case-insensitivity of headers. For example,
+            <code>res.header('content-type')</code> will return the correct
+            value regardless of the actual capitalization.
+        </td>
+    </tr>
+    <tr>
         <td><code>isHttpError</code></td>
         <td>
           A boolean that specifies whether this object represents a
