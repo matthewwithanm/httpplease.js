@@ -80,6 +80,9 @@ factory = (defaults = {}, plugins = []) ->
 
   http.bare = -> factory()
 
+  http.Request = Request
+  http.Response = Response
+
   http
 
 module.exports = factory {}, [cleanURL]
