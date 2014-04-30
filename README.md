@@ -61,7 +61,11 @@ http('http://example.com', function(err, res) {
 
 ### The request object
 
-The request object supports the following properties:
+When you call one of the http functions (`http`, `http.get`, etc.), the result
+is a Request object. This object can also be processed by [plugins](#plugins).
+It has the same properties as the request options object you pass to the http
+function (though properties that you didn't pass will be filled by defaults).
+Those properties are:
 
 <table>
     <tr>
@@ -92,6 +96,17 @@ The request object supports the following properties:
         <td>
           A boolean specifying whether a 404 response should be treated as an
           error or not. Defaults to <code>true</code>.
+        </td>
+    </tr>
+    <tr>
+        <td><code>header</code></td>
+        <td>
+            A method for getting and setting individual headers. This is simply
+            a convenience method for reading and manipulating the
+            <code>headers</code> dictionary that accounts for the
+            case-insensitivity of headers. For example:
+            <code>req.header('Content-Type', 'text/html')</code> sets a header
+            and <code>req.header('Content-Type')</code> returns its value.
         </td>
     </tr>
 </table>
