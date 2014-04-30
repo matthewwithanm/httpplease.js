@@ -176,6 +176,15 @@ are built in:
         </td>
     </tr>
     <tr>
+        <td>jsonrequest</td>
+        <td>No</td>
+        <td>
+            Serializes regular JavaScript objects stored on
+            <code>request.body</code> and sets the Content-Type header to
+            "application/json".
+        </td>
+    </tr>
+    <tr>
         <td>cleanurl</td>
         <td>Yes</td>
         <td>

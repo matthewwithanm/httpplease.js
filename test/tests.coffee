@@ -88,3 +88,10 @@ describe 'plugins', ->
       parseWithContentType 'text/something+json'
       parseWithContentType 'application/json; charset=utf-8'
       parseWithContentType 'application/jsonp', false
+
+  describe 'jsonrequest', ->
+    it 'formats the request', ->
+      req = new http.Request body: hello: 'world'
+      plugins.jsonrequest.processRequest req
+      assert.equal req.body, '{"hello":"world"}'
+      assert.equal req.header('Content-Type'), 'application/json'
