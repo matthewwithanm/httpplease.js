@@ -19,7 +19,7 @@ this one? Because it's awesome, that's why. And this is why it's awesome:
 `<script>` tag fans can grab the standalone build from the "browser-builds"
 directory.
 
-Minified and gzipped, the standalone browser build is <2K.
+Minified and gzipped, the standalone browser build is ~2K.
 
 
 ## API
