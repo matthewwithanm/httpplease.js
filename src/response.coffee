@@ -1,3 +1,5 @@
+Request = require './request'
+
 
 class Response
   constructor: (req) ->
@@ -16,6 +18,8 @@ class Response
             headers[m[1]] = m[2]
       headers
     @isHttpError = @status >= 400
+
+  header: Request::header
 
 
 module.exports = Response
