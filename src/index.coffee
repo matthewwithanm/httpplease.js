@@ -14,7 +14,7 @@ factory = (defaults = {}, plugins = []) ->
 
     # Give the plugins a chance to create the XHR object
     for plugin in plugins
-      if xhr = plugin?.createXHR? req then break # First come, first serve
+      if xhr = plugin.createXHR? req then break # First come, first serve
     xhr ?= new XHR
 
     # Because XHR can be an XMLHttpRequest or an XDomainRequest, we add
