@@ -31,14 +31,14 @@ module.exports = (grunt) ->
           dest: './browser-builds/'
         ]
     coffee:
-      compile:
-        files: [
-          expand: true
-          cwd: './src/'
-          src: ['**/*.?(lit)coffee']
-          dest: './lib/'
-          rename: coffeeRename
-        ]
+      # compile:
+      #   files: [
+      #     expand: true
+      #     cwd: './src/'
+      #     src: ['**/*.?(lit)coffee']
+      #     dest: './lib/'
+      #     rename: coffeeRename
+      #   ]
       browsertests:
         files: [
           expand: true
@@ -107,7 +107,7 @@ module.exports = (grunt) ->
 
   # Define tasks.
   grunt.registerTask 'build', ['build:node', 'build:standalone']
-  grunt.registerTask 'build:node', ['coffee']
+  grunt.registerTask 'build:node', []
   grunt.registerTask 'build:browsertests', ['coffee:browsertests']
   grunt.registerTask 'build:standalone', ['build:node', 'browserify', 'uglify:browserbuilds']
   grunt.registerTask 'default', ['build']
