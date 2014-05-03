@@ -16,12 +16,10 @@
     "xtend": "~3.0.0"
   },
   "devDependencies": {
-    "coffee-script": "~1.7.1",
     "mocha": "~1.18.2",
     "chai": "~1.9.1",
     "grunt": "~0.4.4",
     "grunt-cli": "~0.1.13",
-    "grunt-contrib-coffee": "~0.10.1",
     "grunt-contrib-watch": "~0.6.1",
     "grunt-contrib-uglify": "~0.4.0",
     "grunt-mocha-test": "~0.10.2",
