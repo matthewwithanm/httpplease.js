@@ -1,4 +1,5 @@
-/*jshint strict:false */
+/*globals chai, httpplease, httppleaseplugins, describe, it */
+'use strict';
 
 var
     assert = chai.assert,
