@@ -26,7 +26,7 @@ describe('httpplease', function () {
     });
     it('obeys the errorOn404 option', function (done) {
         http.get({
-            url: '' + testServerUrl + '/404',
+            url: testServerUrl + '/404',
             errorOn404: false
         }, function (err, res) {
             assert.isUndefined(err);
@@ -37,7 +37,7 @@ describe('httpplease', function () {
     it('sends headers', function (done) {
         var req;
         req = {
-            url: '' + testServerUrl + '/headers',
+            url: testServerUrl + '/headers',
             headers: {
                 hello: 'world'
             }
@@ -85,7 +85,7 @@ describe('httpplease', function () {
 describe('plugins', function () {
     describe('jsonparser', function () {
         it('is used for error responses', function (done) {
-            http.use(plugins.jsonparser).get('' + testServerUrl + '/404', function (err, res) {
+            http.use(plugins.jsonparser).get(testServerUrl + '/404', function (err, res) {
                 assert.deepEqual(err.body, {
                     sad: 'panda'
                 });
@@ -93,7 +93,7 @@ describe('plugins', function () {
             });
         });
         it('parses json responses', function (done) {
-            http.use(plugins.jsonparser).get('' + testServerUrl + '/getjson', function (err, res) {
+            http.use(plugins.jsonparser).get(testServerUrl + '/getjson', function (err, res) {
                 assert.deepEqual(res.body, {
                     hello: 'world'
                 });
