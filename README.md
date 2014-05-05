@@ -9,8 +9,10 @@ this one? Because it's awesome, that's why. And this is why it's awesome:
 * …but with a **browser-driven focus** that keeps in mind the limitations of
   that environment (filesize, old IE)
 * Extensible via a **simple but powerful plugin system** (which it dogfoods)
-* Supports **cross-domain requests in IE9** transparently with the
-  [oldiexdomain plugin](#plugins)
+    * Supports **cross-domain requests in IE9** transparently with the
+      [oldiexdomain plugin](#plugins)
+    * Supports promises (thenable/catchable request objects) with the
+      [promises plugin]
 
 [browserify] and [webpack] users can simply `npm install httpplease`.
 
@@ -338,6 +340,7 @@ server is because of [driverdan]'s awesome [node-XMLHttpRequest] library—it's
 the secret sauce that makes the browser-focused design of httpplease possible!
 
 
+[promises plugin]: https://github.com/matthewwithanm/httpplease-promises
 [browserify]: http://browserify.org
 [webpack]: http://webpack.github.io
 [Bower]: http://bower.io
