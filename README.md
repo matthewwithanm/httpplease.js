@@ -30,7 +30,7 @@ Minified and gzipped, the standalone browser build is <2K.
 ### Making a request
 
 ```javascript
-httpplease.get('http://example.com', function(err, res) {
+httpplease.get('http://example.com', function (err, res) {
     // Do something with the result.
 });
 ```
@@ -38,7 +38,7 @@ httpplease.get('http://example.com', function(err, res) {
 Alternatively, you can pass a request options object as the first parameter:
 
 ```javascript
-httpplease.get({url: 'http://example.com'}, function(err, res) {
+httpplease.get({url: 'http://example.com'}, function (err, res) {
     // Do something with the result.
 });
 ```
@@ -46,7 +46,7 @@ httpplease.get({url: 'http://example.com'}, function(err, res) {
 If you'd rather include the method in the object, that's okay too:
 
 ```javascript
-httpplease({method: 'GET', url: 'http://example.com'}, function(err, res) {
+httpplease({method: 'GET', url: 'http://example.com'}, function (err, res) {
     // Do something with the result.
 });
 ```
@@ -55,7 +55,7 @@ You can create a new http function with default request object values:
 
 ```javascript
 var http = httpplease.defaults({method: 'GET', errorOn404: false});
-http('http://example.com', function(err, res) {
+http('http://example.com', function (err, res) {
     // This request was made using the defaults specified above.
 });
 ```
@@ -264,9 +264,9 @@ var http = httpplease.use(jsonparser);
 
 http
   .use(oldiexdomain)
-  .get('http://example.com', function(err, res) { ... }); // Uses "jsonparser" plugin and "oldiexdomain".
-http.get('http://example.com', function(err, res) { ... }); // Only uses "jsonparser" plugin.
-httpplease.get('http://example.com', function(err, res) { ... }); // No extra plugins are used.
+  .get('http://example.com', function (err, res) { ... }); // Uses "jsonparser" plugin and "oldiexdomain".
+http.get('http://example.com', function (err, res) { ... }); // Only uses "jsonparser" plugin.
+httpplease.get('http://example.com', function (err, res) { ... }); // No extra plugins are used.
 ```
 
 You can use as many plugins as you want—either by passing multiple plugins to
