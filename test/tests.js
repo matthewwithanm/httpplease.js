@@ -17,11 +17,32 @@ describe('httpplease', function () {
             done();
         });
     });
+    it('calls onload', function (done) {
+        http.get({
+            url: testServerUrl + '/getjson',
+            onload: function (res) {
+                assert.equal(res.text, JSON.stringify({
+                    hello: 'world'
+                }));
+                done();
+            }
+        });
+    });
     it('identifies errors', function (done) {
         http.get(testServerUrl + '/404', function (err, res) {
             assert.equal(err.status, 404);
             assert(err.isHttpError);
             done();
+        });
+    });
+    it('calls onerror', function (done) {
+        http.get({
+            url: testServerUrl + '/404',
+            onerror: function (err) {
+                assert.equal(err.status, 404);
+                assert(err.isHttpError);
+                done();
+            }
         });
     });
     it('obeys the errorOn404 option', function (done) {
