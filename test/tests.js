@@ -149,6 +149,11 @@ describe('plugins', function () {
         });
     });
     describe('jsonrequest', function () {
+        it('adds an Accept header', function () {
+            var req = new http.Request();
+            plugins.jsonrequest.processRequest(req);
+            assert.equal(req.header('Accept'), 'application/json');
+        });
         it('formats the request', function () {
             var req;
             req = new http.Request({
