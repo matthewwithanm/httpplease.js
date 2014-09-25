@@ -166,4 +166,28 @@ describe('plugins', function () {
             assert.equal(req.header('Content-Type'), 'application/json');
         });
     });
+    describe('updateprotocol', function () {
+        var currentProtocol = typeof window === 'undefined' ? 'http:' : window.location.protocol,
+            otherProtocol = currentProtocol === 'http:' ? 'https:' : 'http:';
+
+        it('uses http by default', function () {
+            var req = new http.Request('//example.com/');
+            plugins.updateprotocol.processRequest(req);
+            assert.equal(req.url, 'http://example.com/');
+        });
+        it('can be invoked to provide options', function () {
+            var req = new http.Request('//example.com/');
+            plugins
+                .updateprotocol({defaultProtocol: currentProtocol})
+                .processRequest(req);
+            assert.equal(req.url, currentProtocol + '//example.com/');
+        });
+        it('can override protocols', function () {
+            var req = new http.Request(otherProtocol + '//example.com/');
+            plugins
+                .updateprotocol({defaultProtocol: currentProtocol, override: true})
+                .processRequest(req);
+            assert.equal(req.url, currentProtocol + '//example.com/');
+        });
+    });
 });
