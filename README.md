@@ -236,7 +236,7 @@ are built in:
         </td>
     </tr>
     <tr>
-        <td>updateprotocol</td>
+        <td>setprotocol</td>
         <td>No</td>
         <td>
             Automatically set the protocol for protocol-relative URLs, allowing
