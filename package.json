@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "xmlhttprequest": "*",
-    "urllite": "~0.4.2",
+    "urllite": "~0.5.0",
     "xtend": "~3.0.0"
   },
   "devDependencies": {

@@ -235,6 +235,18 @@ are built in:
             that didn't define XMLHttpRequest, use an ActiveX object.
         </td>
     </tr>
+    <tr>
+        <td>updateprotocol</td>
+        <td>No</td>
+        <td>
+            Automatically set the protocol for protocol-relative URLs, allowing
+            them to be used in Node. Protocol-relative URLs are important and
+            should be preferred since some browsers don't allow cross-protocol
+            requests. This plugin can also optionally force an override of
+            protocols even when they're present in the URL so that you can be
+            sure you won't have cross-protocol request issues in browsers.
+        </td>
+    </tr>
 </table>
 
 Plugins are enabled with the `use` method:
