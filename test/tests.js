@@ -74,7 +74,7 @@ describe('httpplease', function () {
         it('cancels requests', function (done) {
             http
                 .get(testServerUrl + '/getjson', function (err, res) {
-                    assert.equal(err && err.name, 'Cancel');
+                    assert.equal(err && err.name, 'Abort');
                     assert(err.request && err.request.aborted);
                     done();
                 })

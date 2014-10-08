@@ -121,8 +121,9 @@ Those properties are:
         <td><code>abort</code></td>
         <td>
             A method for aborting the request. This will will result in your
-            callback being invoked. To identify errors caused by
-            <code>abort()</code> calls, check <code>err.request.aborted</code>.
+            callback being invoked. If an error was caused by an
+            <code>abort()</code> call, its name will be <code>"Abort"</code>.
+            (Also, <code>err.request.aborted</code> will be <code>true</code>.)
         </td>
     </tr>
 </table>
