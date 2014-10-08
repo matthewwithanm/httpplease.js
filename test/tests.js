@@ -55,6 +55,16 @@ describe('httpplease', function () {
             done();
         });
     });
+    it('obeys the timeout option', function (done) {
+        http.get({
+            // Use a query param to make sure we're not loading from the cache.
+            url: testServerUrl + '/slow?' + new Date().getTime(),
+            timeout: 1
+        }, function (err, res) {
+            assert.equal(err && err.name, 'Timeout');
+            done();
+        });
+    });
     it('sends headers', function (done) {
         var req;
         req = {
