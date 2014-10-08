@@ -101,6 +101,12 @@ Those properties are:
         </td>
     </tr>
     <tr>
+        <td><code>aborted</code></td>
+        <td>
+          Was this request aborted by calling the <code>abort()</code> method?
+        </td>
+    </tr>
+    <tr>
         <td><code>header</code></td>
         <td>
             A method for getting and setting individual headers. This is simply
@@ -109,6 +115,14 @@ Those properties are:
             case-insensitivity of headers. For example:
             <code>req.header('Content-Type', 'text/html')</code> sets a header
             and <code>req.header('Content-Type')</code> returns its value.
+        </td>
+    </tr>
+    <tr>
+        <td><code>abort</code></td>
+        <td>
+            A method for aborting the request. This will will result in your
+            callback being invoked. To identify errors caused by
+            <code>abort()</code> calls, check <code>err.request.aborted</code>.
         </td>
     </tr>
 </table>

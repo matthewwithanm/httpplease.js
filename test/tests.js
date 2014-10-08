@@ -70,6 +70,17 @@ describe('httpplease', function () {
             done();
         });
     });
+    describe('abort', function () {
+        it('cancels requests', function (done) {
+            http
+                .get(testServerUrl + '/getjson', function (err, res) {
+                    assert.equal(err && err.name, 'Cancel');
+                    assert(err.request && err.request.aborted);
+                    done();
+                })
+                .abort();
+        });
+    });
     describe('defaults', function () {
         it('adds defaults', function () {
             assert.equal(http.defaults({
