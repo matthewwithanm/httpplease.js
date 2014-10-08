@@ -109,12 +109,6 @@ Those properties are:
         </td>
     </tr>
     <tr>
-        <td><code>aborted</code></td>
-        <td>
-          Was this request aborted by calling the <code>abort()</code> method?
-        </td>
-    </tr>
-    <tr>
         <td><code>header</code></td>
         <td>
             A method for getting and setting individual headers. This is simply
@@ -131,7 +125,6 @@ Those properties are:
             A method for aborting the request. This will will result in your
             callback being invoked. If an error was caused by an
             <code>abort()</code> call, its name will be <code>"Abort"</code>.
-            (Also, <code>err.request.aborted</code> will be <code>true</code>.)
         </td>
     </tr>
 </table>
