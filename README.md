@@ -94,6 +94,14 @@ Those properties are:
         </td>
     </tr>
     <tr>
+        <td><code>timeout</code></td>
+        <td>
+            The number of milliseconds to wait before canceling the request. If
+            the request takes longer than this, your callback will be invoked
+            with an error whose name is <code>"Timeout"</code>.
+        </td>
+    </tr>
+    <tr>
         <td><code>errorOn404</code></td>
         <td>
           A boolean specifying whether a 404 response should be treated as an
