@@ -368,6 +368,47 @@ server is because of [driverdan]'s awesome [node-XMLHttpRequest] library—it's
 the secret sauce that makes the browser-focused design of httpplease possible!
 
 
+## Changelog
+
+I try to write good commit messages so the [commit log] should be very readable,
+but here's a summary of some notable changes.
+
+* v0.13.0
+    * Add support for timeouts
+* v0.12.0
+    * Add `abort` to request object
+* v0.11.0
+    * Add `setprotocol` plugin
+* v0.9.0
+    * Ignore request headers when using oldiexdomain
+    * Change when plugin methods are called
+* v0.8.1
+    * Add Accept header if not present for jsonrequest
+* v0.8.0
+    * Add `onload` and `onerror`
+* v0.7.0
+    * Goodbye CoffeeScript
+* v0.6.0
+    * Add jsonrequest plugin
+    * Add `header()` to Request and Response objects
+    * More tests
+* v0.5.3
+    * Improve content-type matching
+* v0.5.1
+    * Fix bug with non-404s being suppressed by `errorOn404`
+* v0.5.0
+    * Return request object from http methods
+* v0.4.0
+    * Added `errorOn404` option
+    * Make `defaults` a method
+    * Make `plugins` a method
+* v0.3.0
+    * Response-like errors
+    * More tests
+* v0.2.0
+    * Initial release as "httpplease"
+
+
 [promises plugin]: https://github.com/matthewwithanm/httpplease-promises
 [browserify]: http://browserify.org
 [webpack]: http://webpack.github.io
@@ -377,3 +418,4 @@ the secret sauce that makes the browser-focused design of httpplease possible!
 [xhr]: https://github.com/Raynos/xhr
 [httpify]: https://github.com/scottcorgan/httpify
 [request]: https://github.com/mikeal/request
+[commit log]: https://github.com/matthewwithanm/httpplease.js/commits/master
