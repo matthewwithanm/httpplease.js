@@ -24,7 +24,7 @@ module.exports = function(grunt) {
                     }
                 },
                 files: {
-                    './browser-builds/standalone/httppleaseplugins.js': './lib/plugins/index.js'
+                    './browser-builds/standalone/httppleaseplugins.js': './plugins/index.js'
                 }
             }
         },
@@ -133,6 +133,6 @@ module.exports = function(grunt) {
         // browser tests.
         GLOBAL.chai = require('chai');
         GLOBAL.httpplease = require('./lib/index');
-        GLOBAL.httppleaseplugins = require('./lib/plugins');
+        GLOBAL.httppleaseplugins = require('./plugins');
     });
 };

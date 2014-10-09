@@ -2,7 +2,7 @@
 
 var
     urllite = require('urllite/lib/core'),
-    once = require('../utils/once'),
+    once = require('../lib/utils/once'),
     warningShown = false;
 
 var supportsXHR = once(function () {

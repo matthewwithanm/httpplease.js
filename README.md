@@ -268,7 +268,7 @@ are built in:
 Plugins are enabled with the `use` method:
 
 ```javascript
-var jsonparser = require('httpplease/lib/plugins/jsonparser');
+var jsonparser = require('httpplease/plugins/jsonparser');
 httpplease = httpplease.use(jsonparser);
 ```
 
