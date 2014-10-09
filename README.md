@@ -380,6 +380,10 @@ the secret sauce that makes the browser-focused design of httpplease possible!
 I try to write good commit messages so the [commit log] should be very readable,
 but here's a summary of some notable changes.
 
+* v0.15.0
+    * Rename "jsonparser" to "jsonresponse"
+    * Set Accept header in "jsonresponse" instead of "jsonrequest"
+    * Add "json" plugin that combines "jsonrequest" and "jsonresponse"
 * v0.14.0
     * Move plugins from `httpplease/lib/plugins` to `httpplease/plugins`
 * v0.13.1
