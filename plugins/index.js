@@ -4,5 +4,6 @@ module.exports = {
     oldiexdomain: require('./oldiexdomain'),
     jsonresponse: require('./jsonresponse'),
     jsonrequest: require('./jsonrequest'),
+    json: require('./json'),
     setprotocol: require('./setprotocol')
 };
