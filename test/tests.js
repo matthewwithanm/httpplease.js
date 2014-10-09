@@ -126,6 +126,11 @@ describe('httpplease', function () {
 
 describe('plugins', function () {
     describe('jsonresponse', function () {
+        it('adds an Accept header', function () {
+            var req = new http.Request();
+            plugins.jsonresponse.processRequest(req);
+            assert.equal(req.header('Accept'), 'application/json');
+        });
         it('is used for error responses', function (done) {
             http.use(plugins.jsonresponse).get(testServerUrl + '/404', function (err, res) {
                 assert.deepEqual(err.body, {
@@ -170,11 +175,6 @@ describe('plugins', function () {
         });
     });
     describe('jsonrequest', function () {
-        it('adds an Accept header', function () {
-            var req = new http.Request();
-            plugins.jsonrequest.processRequest(req);
-            assert.equal(req.header('Accept'), 'application/json');
-        });
         it("adds a Content-Type header if there's a body", function () {
             var req = new http.Request();
             req.body = {hello: 'world'};
