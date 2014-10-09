@@ -373,6 +373,9 @@ the secret sauce that makes the browser-focused design of httpplease possible!
 I try to write good commit messages so the [commit log] should be very readable,
 but here's a summary of some notable changes.
 
+* v0.13.1
+    * Don't add Content-Type header if request has no body in jsonrequest
+      plugin. (This avoids an unneeded preflight request.)
 * v0.13.0
     * Add support for timeouts
 * v0.12.0
