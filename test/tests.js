@@ -125,9 +125,9 @@ describe('httpplease', function () {
 });
 
 describe('plugins', function () {
-    describe('jsonparser', function () {
+    describe('jsonresponse', function () {
         it('is used for error responses', function (done) {
-            http.use(plugins.jsonparser).get(testServerUrl + '/404', function (err, res) {
+            http.use(plugins.jsonresponse).get(testServerUrl + '/404', function (err, res) {
                 assert.deepEqual(err.body, {
                     sad: 'panda'
                 });
@@ -135,7 +135,7 @@ describe('plugins', function () {
             });
         });
         it('parses json responses', function (done) {
-            http.use(plugins.jsonparser).get(testServerUrl + '/getjson', function (err, res) {
+            http.use(plugins.jsonresponse).get(testServerUrl + '/getjson', function (err, res) {
                 assert.deepEqual(res.body, {
                     hello: 'world'
                 });
@@ -151,7 +151,7 @@ describe('plugins', function () {
                 contentType: ct,
                 body: '{"hello": "world"}'
             };
-            plugins.jsonparser.processResponse(res);
+            plugins.jsonresponse.processResponse(res);
             if (isJsonType) {
                 assert.deepEqual(res.body, {
                     hello: 'world'

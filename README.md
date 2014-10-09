@@ -210,7 +210,7 @@ are built in:
         <th>Description</th>
     </tr>
     <tr>
-        <td>jsonparser</td>
+        <td>jsonresponse</td>
         <td>No</td>
         <td>
             Converts JSON responses into JS objects on
@@ -268,8 +268,8 @@ are built in:
 Plugins are enabled with the `use` method:
 
 ```javascript
-var jsonparser = require('httpplease/plugins/jsonparser');
-httpplease = httpplease.use(jsonparser);
+var jsonresponse = require('httpplease/plugins/jsonresponse');
+httpplease = httpplease.use(jsonresponse);
 ```
 
 Or, if you're using the standalone build:
@@ -280,20 +280,20 @@ Or, if you're using the standalone build:
 ```
 
 ```javascript
-var jsonparser = httppleaseplugins.jsonparser;
-httpplease = httpplease.use(jsonparser);
+var jsonresponse = httppleaseplugins.jsonresponse;
+httpplease = httpplease.use(jsonresponse);
 ```
 
 Notice that `use` returns a new httpplease instance. This is so that you can
 create multiple instances, each with their own plugins:
 
 ```javascript
-var http = httpplease.use(jsonparser);
+var http = httpplease.use(jsonresponse);
 
 http
   .use(oldiexdomain)
-  .get('http://example.com', function (err, res) { ... }); // Uses "jsonparser" plugin and "oldiexdomain".
-http.get('http://example.com', function (err, res) { ... }); // Only uses "jsonparser" plugin.
+  .get('http://example.com', function (err, res) { ... }); // Uses "jsonresponse" plugin and "oldiexdomain".
+http.get('http://example.com', function (err, res) { ... }); // Only uses "jsonresponse" plugin.
 httpplease.get('http://example.com', function (err, res) { ... }); // No extra plugins are used.
 ```
 
@@ -302,7 +302,7 @@ You can use as many plugins as you want—either by passing multiple plugins to
 
 ```javascript
 var http = httpplease
-  .use(jsonparser, oldiexdomain, myPlugin)
+  .use(jsonresponse, oldiexdomain, myPlugin)
   .use(anotherPlugin);
 ```
 
