@@ -227,6 +227,13 @@ are built in:
         </td>
     </tr>
     <tr>
+        <td>json</td>
+        <td>No</td>
+        <td>
+            Combines the "jsonrequest" and "jsonresponse" plugins.
+        </td>
+    </tr>
+    <tr>
         <td>cleanurl</td>
         <td>Yes</td>
         <td>
@@ -268,8 +275,8 @@ are built in:
 Plugins are enabled with the `use` method:
 
 ```javascript
-var jsonresponse = require('httpplease/plugins/jsonresponse');
-httpplease = httpplease.use(jsonresponse);
+var json = require('httpplease/plugins/json');
+httpplease = httpplease.use(json);
 ```
 
 Or, if you're using the standalone build:
@@ -280,20 +287,20 @@ Or, if you're using the standalone build:
 ```
 
 ```javascript
-var jsonresponse = httppleaseplugins.jsonresponse;
-httpplease = httpplease.use(jsonresponse);
+var json = httppleaseplugins.json;
+httpplease = httpplease.use(json);
 ```
 
 Notice that `use` returns a new httpplease instance. This is so that you can
 create multiple instances, each with their own plugins:
 
 ```javascript
-var http = httpplease.use(jsonresponse);
+var http = httpplease.use(json);
 
 http
   .use(oldiexdomain)
-  .get('http://example.com', function (err, res) { ... }); // Uses "jsonresponse" plugin and "oldiexdomain".
-http.get('http://example.com', function (err, res) { ... }); // Only uses "jsonresponse" plugin.
+  .get('http://example.com', function (err, res) { ... }); // Uses "json" plugin and "oldiexdomain".
+http.get('http://example.com', function (err, res) { ... }); // Only uses "json" plugin.
 httpplease.get('http://example.com', function (err, res) { ... }); // No extra plugins are used.
 ```
 
@@ -302,7 +309,7 @@ You can use as many plugins as you want—either by passing multiple plugins to
 
 ```javascript
 var http = httpplease
-  .use(jsonresponse, oldiexdomain, myPlugin)
+  .use(json, oldiexdomain, myPlugin)
   .use(anotherPlugin);
 ```
 
