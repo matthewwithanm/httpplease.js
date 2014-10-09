@@ -175,6 +175,17 @@ describe('plugins', function () {
             plugins.jsonrequest.processRequest(req);
             assert.equal(req.header('Accept'), 'application/json');
         });
+        it("adds a Content-Type header if there's a body", function () {
+            var req = new http.Request();
+            req.body = {hello: 'world'};
+            plugins.jsonrequest.processRequest(req);
+            assert.equal(req.header('Content-Type'), 'application/json');
+        });
+        it("doesn't add a Content-Type header if there's no body", function () {
+            var req = new http.Request();
+            plugins.jsonrequest.processRequest(req);
+            assert.isUndefined(req.header('Content-Type'));
+        });
         it('formats the request', function () {
             var req;
             req = new http.Request({
