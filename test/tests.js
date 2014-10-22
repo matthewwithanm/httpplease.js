@@ -80,6 +80,14 @@ describe('httpplease', function () {
             done();
         });
     });
+    it('parses headers', function (done) {
+        var req;
+        req = {url: testServerUrl + '/getjson'};
+        http.get(req, function (err, res) {
+            assert.equal(res.headers['content-type'], 'application/json');
+            done();
+        });
+    });
     describe('abort', function () {
         it('cancels requests', function (done) {
             http
