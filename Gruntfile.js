@@ -9,7 +9,7 @@ module.exports = function(grunt) {
         browserify: {
             standalone: {
                 options: {
-                    bundleOptions: {
+                    browserifyOptions: {
                         standalone: 'httpplease'
                     }
                 },
@@ -19,7 +19,7 @@ module.exports = function(grunt) {
             },
             plugins: {
                 options: {
-                    bundleOptions: {
+                    browserifyOptions: {
                         standalone: 'httppleaseplugins'
                     }
                 },
