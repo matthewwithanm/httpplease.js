@@ -128,7 +128,7 @@ module.exports = function(grunt) {
     grunt.registerTask('test:server', ['runtestserver', 'settestglobals', 'mochaTest']);
     grunt.registerTask('test', ['test:phantom', 'settestglobals', 'mochaTest']);
     grunt.registerTask('runtestserver', ['express:testserver']);
-    return grunt.registerTask('settestglobals', function() {
+    grunt.registerTask('settestglobals', function() {
         // Sets globals for the server tests so we can use the same module for
         // browser tests.
         GLOBAL.chai = require('chai');
