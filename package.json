@@ -1,6 +1,6 @@
 {
   "name": "httpplease",
-  "version": "0.16.0",
+  "version": "0.16.1",
   "description": "The polite HTTP request library for node and the browser",
   "main": "./lib/index.js",
   "browser": {
