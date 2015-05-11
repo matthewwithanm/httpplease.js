@@ -36,6 +36,13 @@ describe('httpplease', function() {
       done();
     });
   });
+  it("doesn't pass responses when there are errors", function(done) {
+    http.get(testServerUrl + '/404', function(err, res) {
+      assert.ok(err);
+      assert.isUndefined(res);
+      done();
+    });
+  });
   it('calls onerror', function(done) {
     http.get({
       url: testServerUrl + '/404',
