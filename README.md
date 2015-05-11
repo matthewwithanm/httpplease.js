@@ -380,6 +380,10 @@ the secret sauce that makes the browser-focused design of httpplease possible!
 I try to write good commit messages so the [commit log] should be very readable,
 but here's a summary of some notable changes.
 
+* v0.16.0
+    * Use `onload` on `onerror` where available since `onreadystatechange` can't
+      differentiate between 0 status code errors and successes
+      (matthewwithanm/react-inlinesvg#10)
 * v0.15.0
     * Rename "jsonparser" to "jsonresponse"
     * Set Accept header in "jsonresponse" instead of "jsonrequest"
