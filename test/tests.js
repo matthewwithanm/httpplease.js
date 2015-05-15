@@ -29,6 +29,14 @@ describe('httpplease', function() {
       }
     });
   });
+  it('puts the request and xhr on the response', function(done) {
+    http.get(testServerUrl + '/getjson', function(err, res) {
+      if (err) return done(err);
+      assert.property(res, 'request');
+      assert.property(res, 'xhr');
+      done();
+    });
+  });
   it('identifies errors', function(done) {
     http.get(testServerUrl + '/404', function(err) {
       assert.equal(err.status, 404);
