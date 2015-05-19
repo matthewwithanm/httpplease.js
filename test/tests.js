@@ -150,6 +150,15 @@ describe('httpplease', function() {
   });
 });
 
+describe('RequestError', function() {
+
+  it('has the correct constructor', function() {
+    var error = new httpplease.RequestError('test');
+    assert.equal(error.constructor.prototype.constructor, httpplease.RequestError);
+  });
+
+});
+
 describe('plugins', function() {
   describe('jsonresponse', function() {
     it('adds an Accept header', function() {
