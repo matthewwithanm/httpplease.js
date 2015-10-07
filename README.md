@@ -127,6 +127,13 @@ Those properties are:
             <code>abort()</code> call, its name will be <code>"Abort"</code>.
         </td>
     </tr>
+    <tr>
+        <td><code>options</code></td>
+        <td>
+            An object to hold any options that should be passed along for
+            use with plugins.
+        </td>
+    </tr>
 </table>
 
 
