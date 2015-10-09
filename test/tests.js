@@ -159,6 +159,81 @@ describe('RequestError', function() {
 
 });
 
+describe('plugin', function() {
+
+  describe('createXHR', function() {
+    function createXHR() {
+      return {open: function() {}, send: function() {}};
+    }
+
+    it('can provide an object that is used for requests', function() {
+      var xhr = createXHR();
+      var req = http
+        .use({createXHR: function() { return xhr; }})
+        .get(testServerUrl + '/404');
+      assert.equal(req.xhr, xhr);
+    });
+
+    it('is treated on a first-come-first-serve basis', function() {
+      var xhr1 = createXHR();
+      var xhr2 = createXHR();
+      var req = http
+        .use({createXHR: function() { return xhr1; }})
+        .use({createXHR: function() { return xhr2; }})
+        .get(testServerUrl + '/404');
+      assert.equal(req.xhr, xhr1);
+    });
+
+  });
+
+  describe('processRequest', function() {
+
+    it('is given the request object to process', function() {
+      var thingProcessRequestGot;
+      var req = http
+        .use({processRequest: function(value) { thingProcessRequestGot = value; }})
+        .get(testServerUrl + '/404');
+      assert.equal(req, thingProcessRequestGot);
+    });
+
+    it('is executed in series', function() {
+      var callOrder = [];
+      http
+        .use({processRequest: function() { callOrder.push(1); }})
+        .use({processRequest: function() { callOrder.push(2); }})
+        .get(testServerUrl + '/404');
+      assert.deepEqual(callOrder, [1, 2]);
+    });
+
+  });
+
+  describe('processResponse', function() {
+
+    it('is given the response object to process', function(done) {
+      var thingProcessResponseGot;
+      http
+        .use({processResponse: function(value) { thingProcessResponseGot = value; }})
+        .get(testServerUrl + '/404', function(err) {
+          assert.equal(err, thingProcessResponseGot);
+          done();
+        });
+    });
+
+    it('is executed in series', function(done) {
+      var callOrder = [];
+      http
+        .use({processResponse: function() { callOrder.push(1); }})
+        .use({processResponse: function() { callOrder.push(2); }})
+        .get(testServerUrl + '/404', function() {
+          assert.deepEqual(callOrder, [1, 2]);
+          done();
+        });
+    });
+
+  });
+
+});
+
 describe('plugins', function() {
   describe('jsonresponse', function() {
     it('adds an Accept header', function() {
