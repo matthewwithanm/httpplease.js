@@ -219,6 +219,25 @@ describe('plugin', function() {
         });
     });
 
+    it('can return a function for continuation', function(done) {
+      var argsPassedToThunk;
+      var thingHandedBackFromThunk = {};
+      http
+        .use({processResponse: function() {
+          return function(cb, req, send) {
+            argsPassedToThunk = [cb, req, send];
+            cb(thingHandedBackFromThunk);
+          };
+        }})
+        .get(testServerUrl + '/404', function(_, res) {
+          assert.isFunction(argsPassedToThunk[0]);
+          assert.instanceOf(argsPassedToThunk[1], httpplease.Request);
+          assert.isFunction(argsPassedToThunk[2]);
+          assert.equal(res, thingHandedBackFromThunk);
+          done();
+        });
+    });
+
     it('is executed in series', function(done) {
       var callOrder = [];
       http
