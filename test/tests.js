@@ -238,6 +238,29 @@ describe('plugin', function() {
         });
     });
 
+    it('can resend a request', function(done) {
+      var theReq, responses = [];
+
+      http
+        .use({processResponse: function(res) {
+          responses.push(res);
+          return function(cb, req, send) {
+            req.tries = req.tries ? req.tries + 1 : 1;
+            theReq = req;
+            if (req.tries < 2) send(req, cb);
+            else cb(res);
+          };
+        }})
+        .get(testServerUrl + '/404', function(err) {
+          assert.equal(theReq.tries, 2);
+          assert.instanceOf(theReq, httpplease.Request);
+          assert.notEqual(responses[0], err);
+          assert.equal(responses[1], err);
+          done();
+        });
+
+    });
+
     it('is executed in series', function(done) {
       var callOrder = [];
       http
