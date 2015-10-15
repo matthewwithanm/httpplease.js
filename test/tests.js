@@ -247,7 +247,7 @@ describe('plugin', function() {
           return function(cb, req, send) {
             req.tries = req.tries ? req.tries + 1 : 1;
             theReq = req;
-            if (req.tries < 2) send(req, cb);
+            if (req.tries < 2) send(req);
             else cb(res);
           };
         }})
@@ -268,6 +268,25 @@ describe('plugin', function() {
         .use({processResponse: function() { callOrder.push(2); }})
         .get(testServerUrl + '/404', function() {
           assert.deepEqual(callOrder, [1, 2]);
+          done();
+        });
+    });
+
+    it("doesn't finish a series when resending", function(done) {
+      var callOrder = [];
+      http
+        .use({processResponse: function() { callOrder.push(1); }})
+        .use({processResponse: function() { callOrder.push(2); }})
+        .use({processResponse: function(res) {
+          return function(cb, req, send) {
+            req.tries = req.tries ? req.tries + 1 : 1;
+            if (req.tries < 2) send(req);
+            else cb(res);
+          };
+        }})
+        .use({processResponse: function() { callOrder.push(3); }})
+        .get(testServerUrl + '/404', function() {
+          assert.deepEqual(callOrder, [1, 2, 1, 2, 3]);
           done();
         });
     });
