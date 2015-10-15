@@ -291,6 +291,27 @@ describe('plugin', function() {
         });
     });
 
+    it('resends using default options', function(done) {
+      var tries = 0;
+
+      http
+        .defaults({method: 'GET', url: testServerUrl + '/404'})
+        .use({processResponse: function(res) {
+          return function(next, req, send) {
+            if (++tries < 2) send();
+            else next(res);
+          };
+        }})
+        (null, function(error) {
+          assert.equal(tries, 2);
+          assert.isTrue(error.isHttpError);
+          assert.equal(error.request.url, testServerUrl + '/404');
+          assert.equal(error.request.method, 'GET');
+          done();
+        });
+
+    });
+
   });
 
 });
