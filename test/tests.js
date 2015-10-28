@@ -290,6 +290,52 @@ describe('plugin', function() {
         });
     });
 
+    it("doesn't reprocess an already processed request when resending", function(testDone) {
+      var processCount = 0, tries = 0;
+
+      http
+        .use({
+          processRequest: function() {
+            processCount++;
+          },
+          processResponse: function(res) {
+            return function(next, done) {
+              if (++tries < 2) this.get(res.request, done);
+              else next(res);
+            };
+          }
+        })
+        .get(testServerUrl + '/404', function() {
+          assert.equal(processCount, 1);
+          assert.equal(tries, 2);
+          testDone();
+        });
+
+    });
+
+    it('reprocesses a resent request when the method changes', function(testDone) {
+      var processCount = 0, tries = 0;
+
+      http
+        .use({
+          processRequest: function() {
+            processCount++;
+          },
+          processResponse: function(res) {
+            return function(next, done) {
+              if (++tries < 2) this.post(res.request, done);
+              else next(res);
+            };
+          }
+        })
+        .get(testServerUrl + '/404', function() {
+          assert.equal(processCount, 2);
+          assert.equal(tries, 2);
+          testDone();
+        });
+
+    });
+
   });
 
 });
