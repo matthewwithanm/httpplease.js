@@ -159,6 +159,187 @@ describe('RequestError', function() {
 
 });
 
+describe('plugin', function() {
+
+  describe('createXHR', function() {
+    function createXHR() {
+      return {open: function() {}, send: function() {}};
+    }
+
+    it('can provide an object that is used for requests', function() {
+      var xhr = createXHR();
+      var req = http
+        .use({createXHR: function() { return xhr; }})
+        .get(testServerUrl + '/404');
+      assert.equal(req.xhr, xhr);
+    });
+
+    it('is treated on a first-come-first-serve basis', function() {
+      var xhr1 = createXHR();
+      var xhr2 = createXHR();
+      var req = http
+        .use({createXHR: function() { return xhr1; }})
+        .use({createXHR: function() { return xhr2; }})
+        .get(testServerUrl + '/404');
+      assert.equal(req.xhr, xhr1);
+    });
+
+  });
+
+  describe('processRequest', function() {
+
+    it('is given the request object to process', function() {
+      var thingProcessRequestGot;
+      var req = http
+        .use({processRequest: function(value) { thingProcessRequestGot = value; }})
+        .get(testServerUrl + '/404');
+      assert.equal(req, thingProcessRequestGot);
+    });
+
+    it('is executed in series', function() {
+      var callOrder = [];
+      http
+        .use({processRequest: function() { callOrder.push(1); }})
+        .use({processRequest: function() { callOrder.push(2); }})
+        .get(testServerUrl + '/404');
+      assert.deepEqual(callOrder, [1, 2]);
+    });
+
+  });
+
+  describe('processResponse', function() {
+
+    it('is given the response object to process', function(done) {
+      var thingProcessResponseGot;
+      http
+        .use({processResponse: function(value) { thingProcessResponseGot = value; }})
+        .get(testServerUrl + '/404', function(err) {
+          assert.equal(err, thingProcessResponseGot);
+          done();
+        });
+    });
+
+    it('can return a function for continuation', function(done) {
+      var argsPassedToThunk, thunkContext, thingHandedBackFromThunk = {};
+
+      var method = http
+        .use({processResponse: function() {
+          return function(next) {
+            argsPassedToThunk = Array.prototype.slice.apply(arguments);
+            thunkContext = this;
+            next(thingHandedBackFromThunk);
+          };
+        }})
+        .get;
+
+      method(testServerUrl + '/404', function(_, res) {
+        assert.equal(res, thingHandedBackFromThunk);
+        assert.equal(thunkContext.get, method);
+        assert.equal(argsPassedToThunk.length, 2);
+        assert.isFunction(argsPassedToThunk[0]);
+        done();
+      });
+    });
+
+    it('can resend a request', function(testDone) {
+      var tries = 0, responses = [];
+
+      http
+        .use({processResponse: function(res) {
+          responses.push(res);
+          return function(next, done) {
+            if (++tries < 2) this.get(res.request, done);
+            else next(res);
+          };
+        }})
+        .get(testServerUrl + '/404', function(err) {
+          assert.equal(tries, 2);
+          assert.notEqual(responses[0], err);
+          assert.equal(responses[1], err);
+          testDone();
+        });
+
+    });
+
+    it('is executed in series', function(done) {
+      var callOrder = [];
+      http
+        .use({processResponse: function() { callOrder.push(1); }})
+        .use({processResponse: function() { callOrder.push(2); }})
+        .get(testServerUrl + '/404', function() {
+          assert.deepEqual(callOrder, [1, 2]);
+          done();
+        });
+    });
+
+    it("doesn't finish a series when done", function(testDone) {
+      var tries = 0, callOrder = [];
+      http
+        .use({processResponse: function() { callOrder.push(1); }})
+        .use({processResponse: function() { callOrder.push(2); }})
+        .use({processResponse: function(res) {
+          return function(next, done) {
+            if (++tries < 2) this.get(res.request, done);
+            else next(res);
+          };
+        }})
+        .use({processResponse: function() { callOrder.push(3); }})
+        .get(testServerUrl + '/404', function() {
+          assert.deepEqual(callOrder, [1, 2, 1, 2, 3]);
+          testDone();
+        });
+    });
+
+    it("doesn't reprocess an already processed request when resending", function(testDone) {
+      var processCount = 0, tries = 0;
+
+      http
+        .use({
+          processRequest: function() {
+            processCount++;
+          },
+          processResponse: function(res) {
+            return function(next, done) {
+              if (++tries < 2) this.get(res.request, done);
+              else next(res);
+            };
+          }
+        })
+        .get(testServerUrl + '/404', function() {
+          assert.equal(processCount, 1);
+          assert.equal(tries, 2);
+          testDone();
+        });
+
+    });
+
+    it('reprocesses a resent request when the method changes', function(testDone) {
+      var processCount = 0, tries = 0;
+
+      http
+        .use({
+          processRequest: function() {
+            processCount++;
+          },
+          processResponse: function(res) {
+            return function(next, done) {
+              if (++tries < 2) this.post(res.request, done);
+              else next(res);
+            };
+          }
+        })
+        .get(testServerUrl + '/404', function() {
+          assert.equal(processCount, 2);
+          assert.equal(tries, 2);
+          testDone();
+        });
+
+    });
+
+  });
+
+});
+
 describe('plugins', function() {
   describe('jsonresponse', function() {
     it('adds an Accept header', function() {
