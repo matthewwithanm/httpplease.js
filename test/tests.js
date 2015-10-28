@@ -220,43 +220,43 @@ describe('plugin', function() {
     });
 
     it('can return a function for continuation', function(done) {
-      var argsPassedToThunk;
-      var thingHandedBackFromThunk = {};
-      http
+      var argsPassedToThunk, thunkContext, thingHandedBackFromThunk = {};
+
+      var method = http
         .use({processResponse: function() {
-          return function(cb, req, send) {
-            argsPassedToThunk = [cb, req, send];
-            cb(thingHandedBackFromThunk);
+          return function(next) {
+            argsPassedToThunk = Array.prototype.slice.apply(arguments);
+            thunkContext = this;
+            next(thingHandedBackFromThunk);
           };
         }})
-        .get(testServerUrl + '/404', function(_, res) {
-          assert.isFunction(argsPassedToThunk[0]);
-          assert.instanceOf(argsPassedToThunk[1], httpplease.Request);
-          assert.isFunction(argsPassedToThunk[2]);
-          assert.equal(res, thingHandedBackFromThunk);
-          done();
-        });
+        .get;
+
+      method(testServerUrl + '/404', function(_, res) {
+        assert.equal(res, thingHandedBackFromThunk);
+        assert.equal(thunkContext.get, method);
+        assert.equal(argsPassedToThunk.length, 2);
+        assert.isFunction(argsPassedToThunk[0]);
+        done();
+      });
     });
 
-    it('can resend a request', function(done) {
-      var theReq, responses = [];
+    it('can resend a request', function(testDone) {
+      var tries = 0, responses = [];
 
       http
         .use({processResponse: function(res) {
           responses.push(res);
-          return function(cb, req, send) {
-            req.tries = req.tries ? req.tries + 1 : 1;
-            theReq = req;
-            if (req.tries < 2) send(req);
-            else cb(res);
+          return function(next, done) {
+            if (++tries < 2) this.get(res.request, done);
+            else next(res);
           };
         }})
         .get(testServerUrl + '/404', function(err) {
-          assert.equal(theReq.tries, 2);
-          assert.instanceOf(theReq, httpplease.Request);
+          assert.equal(tries, 2);
           assert.notEqual(responses[0], err);
           assert.equal(responses[1], err);
-          done();
+          testDone();
         });
 
     });
@@ -272,44 +272,22 @@ describe('plugin', function() {
         });
     });
 
-    it("doesn't finish a series when resending", function(done) {
-      var callOrder = [];
+    it("doesn't finish a series when done", function(testDone) {
+      var tries = 0, callOrder = [];
       http
         .use({processResponse: function() { callOrder.push(1); }})
         .use({processResponse: function() { callOrder.push(2); }})
         .use({processResponse: function(res) {
-          return function(cb, req, send) {
-            req.tries = req.tries ? req.tries + 1 : 1;
-            if (req.tries < 2) send(req);
-            else cb(res);
+          return function(next, done) {
+            if (++tries < 2) this.get(res.request, done);
+            else next(res);
           };
         }})
         .use({processResponse: function() { callOrder.push(3); }})
         .get(testServerUrl + '/404', function() {
           assert.deepEqual(callOrder, [1, 2, 1, 2, 3]);
-          done();
+          testDone();
         });
-    });
-
-    it('resends using default options', function(done) {
-      var tries = 0;
-
-      http
-        .defaults({method: 'GET', url: testServerUrl + '/404'})
-        .use({processResponse: function(res) {
-          return function(next, req, send) {
-            if (++tries < 2) send();
-            else next(res);
-          };
-        }})
-        (null, function(error) {
-          assert.equal(tries, 2);
-          assert.isTrue(error.isHttpError);
-          assert.equal(error.request.url, testServerUrl + '/404');
-          assert.equal(error.request.method, 'GET');
-          done();
-        });
-
     });
 
   });
